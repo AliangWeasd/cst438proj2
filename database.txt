@@ -1,0 +1,6 @@
+Login Site: http://cst336.herokuapp.com/db/
+
+Server: pwcspfbyl73eccbn.cbetxkdyhwsb.us-east-1.rds.amazonaws.com
+Username: la8jsp9yrvvjmecw
+Password: dz1gz2pnr8awpoc7
+Database: b4rpjxyu117cmkvr
