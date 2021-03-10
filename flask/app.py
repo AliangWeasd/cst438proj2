@@ -21,22 +21,12 @@ def login_required(f):
             return redirect(url_for('login'))
     return wrap
 
-
-# use decorators to link the function to a url
-@app.route('/')
-@login_required
-def home():
-    return render_template('index.html')  # render a template
-    # return "Hello, World!"  # return a string
-
-
-@app.route('/welcome')
-def welcome():
-    return render_template('welcome.html')  # render a template
-
-
+@app.route('/signUp')
+def signUp():
+    return render_template('signUp.html')
+    
 # route for handling the login page logic
-@app.route('/login', methods=['GET', 'POST'])
+@app.route('/', methods=['GET', 'POST'])
 def login():
     error = None
     if request.method == 'POST':
@@ -46,8 +36,30 @@ def login():
         else:
             session['logged_in'] = True
             flash('You were logged in.')
-            return redirect(url_for('home'))
-    return render_template('login.html', error=error)
+            return redirect(url_for('welcome'))
+    return render_template('index.html', error=error)
+
+@app.route('/admin',methods=['GET', 'POST'])
+def admin():
+    error = None
+    if request.method == 'POST':
+        if (request.form['adminUsername'] != 'admin') \
+                or request.form['adminPassword'] != 'admin':
+            error = 'Invalid Credentials. Please try again.'
+        else:
+            session['logged_in'] = True
+            flash('You were logged in.')
+            return redirect(url_for('adminPage'))
+    return render_template('admin.html', error=error)
+
+@app.route('/adminPage')
+@login_required
+def adminPage():
+    return render_template('adminPage.html')
+
+@app.route('/welcome')
+def welcome():
+    return render_template('welcome.html')  # render a template
 
 
 @app.route('/logout')

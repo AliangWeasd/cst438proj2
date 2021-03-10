@@ -1,8 +1,22 @@
 {% extends "base.html" %}
 {% block content %}
 
-<h1>Welcome to Flask!</h1>
+<div>
+  Wishlist:
+  <a href="/logout">Home</a>
+  <a href="/admin">Admin</a>
+  <a href="/signUp">Sign Up</a>
+</div>
+
+
+<h1>Welcome to Wishlist!</h1>
 <br>
-<p>Click <a href="/logout">here</a> to logout.</p>
+<h3>Please login</h3>
+<br>
+<form action="" method="post">
+  <input type="text" placeholder="Username" name="username" value="{{request.form.username }}">
+  <input type="password" placeholder="Password" name="password" value="{{request.form.password }}">
+  <input class="btn btn-default" type="submit" value="Login">
+</form>
 
 {% endblock %}
