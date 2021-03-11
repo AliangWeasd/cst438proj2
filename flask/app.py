@@ -2,13 +2,18 @@
 from flask import Flask, render_template, redirect, \
     url_for, request, session, flash
 from functools import wraps
+from flask_mysqldb import MySQL
 
 # create the application object
 app = Flask(__name__)
+app.config['MYSQL_USER'] = 'la8jsp9yrvvjmecw'
+app.config['MYSQL_PASSWORD'] = 'dz1gz2pnr8awpoc7'
+app.config['MYSQL_DB'] = 'b4rpjxyu117cmkvr'
+app.config['MYSQL_HOST'] = 'pwcspfbyl73eccbn.cbetxkdyhwsb.us-east-1.rds.amazonaws.com'
+mysql = MySQL(app)
 
 # config
 app.secret_key = 'my precious'
-
 
 # login required decorator
 def login_required(f):
@@ -21,22 +26,40 @@ def login_required(f):
             return redirect(url_for('login'))
     return wrap
 
-@app.route('/signUp')
+@app.route('/signUp', methods=['GET', 'POST'])
 def signUp():
-    return render_template('signUp.html')
+    error = None
+    if request.method == 'POST' and 'username' in request.form and 'password' in request.form:
+        userId = request.form['id']
+        username = request.form['username']
+        password = request.form['password']
+        cursor = mysql.connection.cursor()
+        cursor.execute('SELECT * FROM user WHERE username = % s', (username, ))
+        user = cursor.fetchone()
+        if user:
+            error = 'Account already exists'
+        else:
+            cursor.execute('INSERT INTO user VALUES (NULL,% s, % s, % s)', (userId, username, password, ))
+            mysql.connection.commit()
+            error = 'Account created'
+
+    return render_template('signUp.html', error=error)
     
 # route for handling the login page logic
 @app.route('/', methods=['GET', 'POST'])
 def login():
     error = None
-    if request.method == 'POST':
-        if (request.form['username'] != 'admin') \
-                or request.form['password'] != 'admin':
-            error = 'Invalid Credentials. Please try again.'
+    if request.method == 'POST' and 'username' in request.form and 'password' in request.form:
+        username = request.form['username'] 
+        password = request.form['password']
+        cursor = mysql.connection.cursor()
+        cursor.execute('SELECT * FROM user WHERE username = % s AND password = % s', (username, password ))
+        user = cursor.fetchone()
+        if user:
+            error = 'Logged in'
+            return render_template('welcome.html', error=error)
         else:
-            session['logged_in'] = True
-            flash('You were logged in.')
-            return redirect(url_for('welcome'))
+            error = 'Incorrect username/password'
     return render_template('index.html', error=error)
 
 @app.route('/admin',methods=['GET', 'POST'])
