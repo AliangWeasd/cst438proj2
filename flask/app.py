@@ -45,8 +45,12 @@ def signUp():
 
     return render_template('signUp.html', error=error)
     
-# route for handling the login page logic
-@app.route('/', methods=['GET', 'POST'])
+@app.route('/')
+def home():
+    return render_template('homePage.html')
+
+#route for handling the login page logic
+@app.route('/login', methods=['GET', 'POST'])
 def login():
     error = None
     if request.method == 'POST' and 'username' in request.form and 'password' in request.form:
@@ -60,7 +64,7 @@ def login():
             return render_template('welcome.html', error=error)
         else:
             error = 'Incorrect username/password'
-    return render_template('index.html', error=error)
+    return render_template('login.html', error=error)
 
 @app.route('/admin',methods=['GET', 'POST'])
 def admin():

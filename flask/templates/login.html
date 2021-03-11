@@ -38,5 +38,16 @@
   </nav>
 </div>
 
-<h1>Welcome to Wishlist!</h1>
+
+<h1 align="center">Welcome to Wishlist!</h1>
 <br>
+<h3 align="center">Please login</h3>
+<br>
+<div align="center">
+
+  <form action="" method="post">
+    <input type="text" placeholder="Username" name="username" value="{{request.form.username }}">
+    <input type="password" placeholder="Password" name="password" value="{{request.form.password }}">
+    <input class="btn btn-default" type="submit" value="Login">
+  </form>
+</div>
