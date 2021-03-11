@@ -35,8 +35,21 @@
         </ul>
       </div>
     </div>
-  </nav>
+</nav>
 </div>
 
-<h1>Welcome to Wishlist!</h1>
+<h1>Welcome to Wishlist, 
+{{loginUser['name']}}
+!</h1>
 <br>
+
+<form action="/addList">
+    <button>Create Wishlist</button>
+</form>
+
+{% for row in wishlistTable %}
+    <tr>
+        <td>{{row['wishlistID']}}</td>
+        <td>{{row['name']}}</td>
+    </tr>
+{% endfor %}

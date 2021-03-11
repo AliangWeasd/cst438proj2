@@ -3,6 +3,7 @@ from flask import Flask, render_template, redirect, \
     url_for, request, session, flash
 from functools import wraps
 from flask_mysqldb import MySQL
+import MySQLdb.cursors
 
 # create the application object
 app = Flask(__name__)
@@ -56,12 +57,14 @@ def login():
     if request.method == 'POST' and 'username' in request.form and 'password' in request.form:
         username = request.form['username'] 
         password = request.form['password']
-        cursor = mysql.connection.cursor()
-        cursor.execute('SELECT * FROM user WHERE username = % s AND password = % s', (username, password ))
+        cursor = mysql.connection.cursor(MySQLdb.cursors.DictCursor)
+        cursor.execute('SELECT * FROM user WHERE username = % s AND password = % s', (username, password, ))
         user = cursor.fetchone()
         if user:
+            cursor.execute('SELECT * FROM wishlist WHERE wishlist.userID = % s', (user['userID'],))
+            wishlists = cursor.fetchall()
             error = 'Logged in'
-            return render_template('welcome.html', error=error)
+            return render_template('welcome.html', error=error, loginUser=user, wishlistTable=wishlists)
         else:
             error = 'Incorrect username/password'
     return render_template('login.html', error=error)
