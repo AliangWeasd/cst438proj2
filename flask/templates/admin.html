@@ -8,12 +8,15 @@
     <a href="/signUp">Sign Up</a>
 </div>
 
-<h1>Admin Login</h1>
+<h1 align="center">Admin Login</h1>
 <br>
-<form action="" method="post">
-    <input type="text" placeholder="Username" name="adminUsername" value="{{request.form.adminUsername }}">
-    <input type="password" placeholder="Password" name="adminPassword" value="{{request.form.adminPassword }}">
-    <input class="btn btn-default" type="submit" value="Login">
-</form>
+<div align="center">
 
+
+    <form action="" method="post">
+        <input type="text" placeholder="Username" name="adminUsername" value="{{request.form.adminUsername }}">
+        <input type="password" placeholder="Password" name="adminPassword" value="{{request.form.adminPassword }}">
+        <input class="btn btn-default" type="submit" value="Login">
+    </form>
+</div>
 {% endblock %}
