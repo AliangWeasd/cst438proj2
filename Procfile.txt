@@ -1,1 +1,1 @@
-web: gunicorn app:wishlistcst438
+web: gunicorn app:app
