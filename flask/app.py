@@ -31,7 +31,7 @@ def login_required(f):
 def signUp():
     error = None
     if request.method == 'POST' and 'username' in request.form and 'password' in request.form:
-        userId = request.form['id']
+        name = request.form['name']
         username = request.form['username']
         password = request.form['password']
         cursor = mysql.connection.cursor()
@@ -40,7 +40,7 @@ def signUp():
         if user:
             error = 'Account already exists'
         else:
-            cursor.execute('INSERT INTO user VALUES (NULL,% s, % s, % s)', (userId, username, password, ))
+            cursor.execute('INSERT INTO user VALUES (NULL,% s, % s, % s)', (name, username, password, ))
             mysql.connection.commit()
             error = 'Account created'
 
@@ -98,6 +98,13 @@ def logout():
     session.pop('logged_in', None)
     flash('You were logged out.')
     return redirect(url_for('welcome'))
+
+@app.route('/displayUsers')
+def displayUser():
+    cursor = mysql.connection.cursor(MySQLdb.cursors.DictCursor)
+    cursor.execute('SELECT * FROM user')
+    data = cursor.fetchall()
+    return render_template('displayUsers.html',data=data)
 
 
 # start the server with the 'run()' method
