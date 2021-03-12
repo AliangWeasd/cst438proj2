@@ -108,6 +108,11 @@ def displayUser():
 
 @app.route('/wishlist', methods=['GET', 'POST'])
 def wishlist():
+    user = request.form['user']
+    itemURL = request.form['itemURL']
+    image = request.form['image']
+    description = request.form['description']
+    cursor = mysql.connection.cursor()
     return render_template('wishList.html')
 
 
