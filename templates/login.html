@@ -29,45 +29,30 @@
             <li><a href="/">Home</a></li>
             <li><a href="/admin">Admin</a></li>
         </ul>
-<<<<<<< HEAD
         <ul class="nav navbar-nav">
           <li><a href="/wishlist"></i>Wishlist</a></li>
   
         </ul>
-=======
->>>>>>> main
         <ul class="nav navbar-nav navbar-right">
           <li><a href="/login"></i>Login</a></li>
+          <li><a href="/logout"></i>Logout</a></li>
   
         </ul>
       </div>
     </div>
   </nav>
 </div>
-<div align="center" class="column is-4 is-offset-4">
-    <h3 class="title">Sign Up</h3>
-    <div class="box">
-        <form method="POST" action="/signUp">
 
-            <div class="field">
-                <div class="control">
-                    <input class="input is-large" type="text" name="name" placeholder="Name" autofocus="">
-                </div>
-            </div>
 
-            <div class="field">
-                <div class="control">
-                    <input class="input is-large" type="text" name="username" placeholder="Username" autofocus="">
-                </div>
-            </div>
+<h1 align="center">Welcome to Wishlist!</h1>
+<br>
+<h3 align="center">Please login</h3>
+<br>
+<div align="center">
 
-            <div class="field">
-                <div class="control">
-                    <input class="input is-large" type="password" name="password" placeholder="Password">
-                </div>
-            </div>
-
-            <button class="button is-block is-info is-large is-fullwidth">Sign Up</button>
-        </form>
-    </div>
+  <form action="" method="post">
+    <input type="text" placeholder="Username" name="username" value="{{request.form.username }}">
+    <input type="password" placeholder="Password" name="password" value="{{request.form.password }}">
+    <input class="btn btn-default" type="submit" value="Login">
+  </form>
 </div>

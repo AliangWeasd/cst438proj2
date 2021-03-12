@@ -97,7 +97,7 @@ def welcome():
 def logout():
     session.pop('logged_in', None)
     flash('You were logged out.')
-    return redirect(url_for('welcome'))
+    return render_template('homePage.html')
 
 @app.route('/displayUsers')
 def displayUser():
@@ -106,7 +106,6 @@ def displayUser():
     data = cursor.fetchall()
     return render_template('displayUsers.html',data=data)
 
-<<<<<<< HEAD
 @app.route('/wishlist', methods=['GET', 'POST'])
 def wishlist():
     #user = request.form['user']
@@ -116,9 +115,6 @@ def wishlist():
     #cursor = mysql.connection.cursor()
     return render_template('wishList.html')
 
-
-=======
->>>>>>> main
 
 # start the server with the 'run()' method
 if __name__ == '__main__':
