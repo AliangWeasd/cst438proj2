@@ -106,6 +106,13 @@ def displayUser():
     data = cursor.fetchall()
     return render_template('displayUsers.html',data=data)
 
+@app.route('/delete/<int:id>')
+def delete(id):
+    cursor = mysql.connection.cursor(MySQLdb.cursors.DictCursor)
+    cursor.execute('DELETE FROM user WHERE userID = % s' % (id))
+    mysql.connection.commit()
+    return redirect(url_for('displayUser'))
+
 @app.route('/wishlist', methods=['GET', 'POST'])
 def wishlist():
     #user = request.form['user']
