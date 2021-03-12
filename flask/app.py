@@ -106,6 +106,7 @@ def displayUser():
     data = cursor.fetchall()
     return render_template('displayUsers.html',data=data)
 
+<<<<<<< HEAD
 @app.route('/wishlist', methods=['GET', 'POST'])
 def wishlist():
     #user = request.form['user']
@@ -116,6 +117,8 @@ def wishlist():
     return render_template('wishList.html')
 
 
+=======
+>>>>>>> main
 
 # start the server with the 'run()' method
 if __name__ == '__main__':
