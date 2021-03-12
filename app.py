@@ -16,16 +16,16 @@ mysql = MySQL(app)
 # config
 app.secret_key = 'my precious'
 
-# login required decorator
-def login_required(f):
-    @wraps(f)
-    def wrap(*args, **kwargs):
-        if 'logged_in' in session:
-            return f(*args, **kwargs)
-        else:
-            flash('You need to login first.')
-            return redirect(url_for('login'))
-    return wrap
+# # login required decorator
+# def login_required(f):
+#     @wraps(f)
+#     def wrap(*args, **kwargs):
+#         if 'logged_in' in session:
+#             return f(*args, **kwargs)
+#         else:
+#             flash('You need to login first.')
+#             return redirect(url_for('login'))
+#     return wrap
 
 @app.route('/signUp', methods=['GET', 'POST'])
 def signUp():
@@ -83,7 +83,6 @@ def admin():
     return render_template('admin.html', error=error)
 
 @app.route('/adminPage')
-@login_required
 def adminPage():
     return render_template('adminPage.html')
 
@@ -93,11 +92,10 @@ def welcome():
 
 
 @app.route('/logout')
-@login_required
 def logout():
     session.pop('logged_in', None)
     flash('You were logged out.')
-    return render_template('homePage.html')
+    return redirect(url_for('home'))
 
 @app.route('/displayUsers')
 def displayUser():
