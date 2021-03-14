@@ -106,19 +106,22 @@ def displayUser():
     data = cursor.fetchall()
     return render_template('displayUsers.html',data=data)
 
-<<<<<<< HEAD
 @app.route('/wishlist', methods=['GET', 'POST'])
 def wishlist():
-    #user = request.form['user']
-    #itemURL = request.form['itemURL']
-    #image = request.form['image']
-    #description = request.form['description']
-    #cursor = mysql.connection.cursor()
-    return render_template('wishList.html')
+    error = 'none'
+    cursor = mysql.connection.cursor()
+    cursor.execute('SELECT * FROM WishlistItems')
+    data = cursor.fetchall()
+    if request.method == 'POST':
+        itemURL = request.form['itemURL']
+        imageURL = request.form['imageURL']
+        description = request.form['description']
+        cursor.execute('INSERT INTO WishlistItems VALUES (NULL, % s, % s, % s)', (itemURL, imageURL, description ))
+        mysql.connection.commit()
+        error = 'Wishlist Added'       
+    return render_template('wishList.html', error=error, data=data)
 
 
-=======
->>>>>>> main
 
 # start the server with the 'run()' method
 if __name__ == '__main__':
