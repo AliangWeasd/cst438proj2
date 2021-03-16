@@ -116,11 +116,18 @@ def wishlist():
         itemURL = request.form['itemURL']
         imageURL = request.form['imageURL']
         description = request.form['description']
-        cursor.execute('INSERT INTO WishlistItems VALUES (NULL, % s, % s, % s)', (itemURL, imageURL, description ))
+        cursor.execute('INSERT INTO WishlistItems VALUES (NULL, % s, % s, % s)', (itemURL, imageURL, description, ))
         mysql.connection.commit()
         error = 'Wishlist Added'       
     return render_template('wishList.html', error=error, data=data)
 
+@app.route('/testDisplay', methods=['GET'])
+def testDisplay():
+    error = 'none'
+    cursor = mysql.connection.cursor()
+    cursor.execute('SELECT * FROM WishlistItems')
+    data = cursor.fetchall()
+    return render_template('testDisplay.html', error=error, data=data)
 
 
 # start the server with the 'run()' method
