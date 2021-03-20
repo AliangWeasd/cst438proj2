@@ -29,34 +29,43 @@
             <li><a href="/">Home</a></li>
             <li><a href="/admin">Admin</a></li>
         </ul>
-<<<<<<< HEAD
         <ul class="nav navbar-nav">
           <li><a href="/wishlist"></i>Wishlist</a></li>
   
         </ul>
-=======
->>>>>>> main
         <ul class="nav navbar-nav navbar-right">
           <li><a href="/login"></i>Login</a></li>
+          <li><a href="/logout"></i>Logout</a></li>
   
         </ul>
       </div>
     </div>
-</nav>
+  </nav>
 </div>
+<div align="center" class="column is-4 is-offset-4">
+    <h3 class="title">Sign Up</h3>
+    <div class="box">
+        <form method="POST" action="/signUp">
 
-<h1>Welcome to Wishlist, 
-{{loginUser['name']}}
-!</h1>
-<br>
+            <div class="field">
+                <div class="control">
+                    <input class="input is-large" type="text" name="name" placeholder="Name" autofocus="">
+                </div>
+            </div>
 
-<form action="/addList">
-    <button>Create Wishlist</button>
-</form>
+            <div class="field">
+                <div class="control">
+                    <input class="input is-large" type="text" name="username" placeholder="Username" autofocus="">
+                </div>
+            </div>
 
-{% for row in wishlistTable %}
-    <tr>
-        <td>{{row['wishlistID']}}</td>
-        <td>{{row['name']}}</td>
-    </tr>
-{% endfor %}
+            <div class="field">
+                <div class="control">
+                    <input class="input is-large" type="password" name="password" placeholder="Password">
+                </div>
+            </div>
+
+            <button class="button is-block is-info is-large is-fullwidth">Sign Up</button>
+        </form>
+    </div>
+</div>
