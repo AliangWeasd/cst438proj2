@@ -63,6 +63,7 @@ def login():
         if user:
             cursor.execute('SELECT * FROM wishlist WHERE wishlist.userID = % s', (user['userID'],))
             wishlists = cursor.fetchall()
+            session['user'] = user
             error = 'Logged in'
             return render_template('welcome.html', error=error, loginUser=user, wishlistTable=wishlists)
         else:
@@ -94,6 +95,7 @@ def welcome():
 @app.route('/logout')
 def logout():
     session.pop('logged_in', None)
+    session.pop('user', None)
     flash('You were logged out.')
     return redirect(url_for('home'))
 
