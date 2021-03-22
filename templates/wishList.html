@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<html>
+    <head>
+        <title>Test Homepage</title>
+        <link href="https://fonts.googleapis.com/css?family=Montserrat:400,600i,700,900" rel="stylesheet">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+      integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+        <link rel="stylesheet" type="text/css" href="frontPage.css">
+    </head>
+    
+    <body>
+    <div class="background">
+    <nav class="navbar navbar-default">
+        <div class="container">
+      
+          <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+              <span class="sr-only">Toggle navigation</span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="#">AKAR Wishlist</a>
+          </div>
+      
+          <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav">
+                <li><a href="/">Home</a></li>
+                <li><a href="/admin">Admin</a></li>
+            </ul>
+            <ul class="nav navbar-nav">
+                <li><a href="/wishlist"></i>Wishlist</a></li>
+        
+              </ul>
+            <ul class="nav navbar-nav navbar-right">
+              <li><a href="/login"></i>Login</a></li>
+              <li><a href="/logout"></i>Logout</a></li>
+      
+            </ul>
+          </div>
+        </div>
+    </nav>
+    </div>
+
+    <div align="center" class="column is-4 is-offset-4">
+      <h3 class="title">Add Wishlist</h3>
+      <div class="box">
+          <form method="POST" action="/wishlist">
+  
+              <div class="field">
+                  <div class="control">
+                      <input class="input is-large" type="url" name="itemURL" placeholder="Item Url" autofocus="">
+                  </div>
+              </div>
+  
+              <div class="field">
+                  <div class="control">
+                      <input class="input is-large" type="url" name="imageURL" placeholder="Image Url" autofocus="">
+                  </div>
+              </div>
+  
+              <div class="field">
+                  <div class="control">
+                      <input class="input is-large" type="text" name="description" placeholder="Description">
+                  </div>
+              </div>
+  
+              <button class="button is-block is-info is-large is-fullwidth">Add Wishlist</button>
+          </form>
+      </div>
+
+      <!--Table-->
+      {% for item in data %}
+        <tr>
+            <td>{{item[0]}}</td><br>
+            <td>{{item[1]}}</td><br>
+            <td><img src={{item[2]}}></td><br>
+            <td>{{item[3]}}</td><br>
+        </tr>
+        <hr>
+      {% endfor %}
+      
+      </body>
+
+      </html>
