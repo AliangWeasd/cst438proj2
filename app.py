@@ -1,17 +1,4 @@
-<<<<<<< HEAD
-from flask import Flask, render_template
 
-app = Flask(__name__)
-
-
-@app.route('/')
-def addItem():
-    return render_template('test_homepage.html')
-
-
-if __name__ == '__main__':
-    app.run()
-=======
 # import the Flask class from the flask module
 from flask import Flask, render_template, redirect, \
     url_for, request, session, flash
@@ -154,4 +141,4 @@ def testDisplay():
 # start the server with the 'run()' method
 if __name__ == '__main__':
     app.run(debug=True)
->>>>>>> 7a43eb558a4c4c1f6dde91778e4b5b437e7683c0
+
