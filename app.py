@@ -29,7 +29,7 @@ app.secret_key = 'my precious'
 
 @app.route('/signUp', methods=['GET', 'POST'])
 def signUp():
-    error = None
+    error = ''
     if request.method == 'POST' and 'username' in request.form and 'password' in request.form:
         name = request.form['name']
         username = request.form['username']
@@ -53,7 +53,7 @@ def home():
 #route for handling the login page logic
 @app.route('/login', methods=['GET', 'POST'])
 def login():
-    error = None
+    error = ''
     if request.method == 'POST' and 'username' in request.form and 'password' in request.form:
         username = request.form['username'] 
         password = request.form['password']
@@ -72,7 +72,7 @@ def login():
 
 @app.route('/admin',methods=['GET', 'POST'])
 def admin():
-    error = None
+    error = ''
     if request.method == 'POST':
         if (request.form['adminUsername'] != 'admin') \
                 or request.form['adminPassword'] != 'admin':
@@ -136,6 +136,7 @@ def testDisplay():
     data = cursor.fetchall()
     return render_template('testDisplay.html', error=error, data=data)
 
+# @app.route('/editUser')
 # start the server with the 'run()' method
 if __name__ == '__main__':
     app.run(debug=True)

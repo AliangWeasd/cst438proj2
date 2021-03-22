@@ -51,6 +51,7 @@
     <form action="" method="post">
         <input type="text" placeholder="Username" name="adminUsername" value="{{request.form.adminUsername }}">
         <input type="password" placeholder="Password" name="adminPassword" value="{{request.form.adminPassword }}">
-        <input class="btn btn-default" type="submit" value="Login">
+        <input class="btn btn-default" type="submit" value="Login"><br>
+        {{error}}
     </form>
 </div>
