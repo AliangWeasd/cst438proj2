@@ -114,7 +114,7 @@ def delete(id):
     mysql.connection.commit()
     return redirect(url_for('displayUser'))
 
-@app.route('/wishlist', methods=['GET', 'POST'])
+@app.route('/wishlist', methods=['GET', 'POST', 'DELETE'])
 def wishlist():
     error = 'none'
     cursor = mysql.connection.cursor()
@@ -129,8 +129,17 @@ def wishlist():
         mysql.connection.commit()
         error = 'Wishlist Added'
         return redirect("/wishlist")
-        #Need an alert if a duplicate was found(try/catch)     
+    if request.method == 'DELETE':
+        wishlistID = request.form['wishlistID']
+        cursor.execute('DELETE FROM WishlistItems WHERE wishlistID = %s' % (wishlistID))
+        mysql.connection.commit()
+        return redirect("/wishlist")   
     return render_template('wishList.html', error=error, data=data)
+
+@app.route('/wishlistDelete/<int:id>', methods=['DELETE'])
+def wishlistDelete(id):
+
+    return redirect("/wishlist")
 
 @app.route('/testDisplay', methods=['GET'])
 def testDisplay():

@@ -44,7 +44,7 @@
     </div>
 
     <div align="center" class="column is-4 is-offset-4">
-      <h3 class="title">Add Wishlist</h3>
+      <h3 class="title">Add To Wishlist</h3>
       <div class="box">
           <form method="POST" action="/wishlist">
   
@@ -81,16 +81,29 @@
       <br>
       <h3 align="center" class="title">Currnet Wishlists</h3>
       <!--Table-->
+      <div class="box">
+        <form method="DELETE" action="/wishlist">
       {% for item in data %}
         <tr>
-            List Name: <td>{{item[1]}}</td><br>
-            <td>{{item[2]}}</td><br>
-            <td><img src={{item[3]}}></td><br>
-            Description: <td>{{item[4]}}</td><br>
+            List Name: <td>{{item[2]}}</td><br>
+            <td>{{item[3]}}</td><br>
+            <td><img src={{item[4]}}></td><br>
+            Description: <td>{{item[5]}}</td><br>
+            <td><button id={{item[1]}} class="deleteBtn">Delete</button></td>
         </tr>
         <hr>
       {% endfor %}
+      </form>
+      </div>
       
       </body>
+      <script>
+        $(".deleteBtn").on("click",function(){
+          
+            let itemId = $(this).attr("id");
+            window.location.href=`/wishlistDelete/`+itemId; 
+          
+        });
+      </script>
 
       </html>
