@@ -126,7 +126,9 @@ def wishlist():
         description = request.form['description']
         cursor.execute('INSERT INTO WishlistItems VALUES (NULL, % s, % s, % s)', (itemURL, imageURL, description, ))
         mysql.connection.commit()
-        error = 'Wishlist Added'       
+        error = 'Wishlist Added'
+        return redirect("/wishlist")
+        #Need an alert if a duplicate was found(try/catch)     
     return render_template('wishList.html', error=error, data=data)
 
 @app.route('/testDisplay', methods=['GET'])
