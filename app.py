@@ -17,16 +17,16 @@ mysql = MySQL(app)
 # config
 app.secret_key = 'my precious'
 
-# # login required decorator
-# def login_required(f):
-#     @wraps(f)
-#     def wrap(*args, **kwargs):
-#         if 'logged_in' in session:
-#             return f(*args, **kwargs)
-#         else:
-#             flash('You need to login first.')
-#             return redirect(url_for('login'))
-#     return wrap
+# login required decorator
+def login_required(f):
+    @wraps(f)
+    def wrap(*args, **kwargs):
+        if 'logged_in' in session:
+            return f(*args, **kwargs)
+        else:
+            flash('You need to login first.')
+            return redirect(url_for('login'))
+    return wrap
 
 @app.route('/signUp', methods=['GET', 'POST'])
 def signUp():
@@ -137,8 +137,53 @@ def testDisplay():
     data = cursor.fetchall()
     return render_template('testDisplay.html', error=error, data=data)
 
-# @app.route('/editUser')
+
+@app.route('/editUser', methods=['GET', 'POST'])
+@login_required
+def editUser():
+    error = ''
+    if 'user' in session:
+        user = session["user"]
+        cursor = mysql.connection.cursor(MySQLdb.cursors.DictCursor)
+        cursor.execute('SELECT * FROM user')
+        data = cursor.fetchone()
+    return render_template('editUser.html',error=error,data=data,user=user)
+
+@app.route('/updateUsername/<int:id>', methods=['GET', 'POST'])
+def updateUsername(id):
+    error = ''
+    if 'user' in session:
+        user = session["user"]
+        if request.method == 'POST' and 'newUsername' in request.form:
+            newUsername = request.form['newUsername']
+            cursor = mysql.connection.cursor()
+            sql = 'UPDATE user SET username = % s WHERE userID = % s'
+            data = (newUsername,id)
+            cursor.execute(sql,data)
+            mysql.connection.commit()
+            error = 'Account updated, please login again'
+            session.pop('logged_in', None)
+            session.pop('user', None)
+            return render_template('updateUsername.html',user=user,error=error)
+    return render_template('updateUsername.html',user=user)
+
+@app.route('/updatePassword/<int:id>', methods=['GET', 'POST'])
+def updatePassword(id):
+    error = ''
+    if 'user' in session:
+        user = session["user"]
+        if request.method == 'POST' and 'newPassword' in request.form:
+            newPassword = request.form['newPassword']
+            cursor = mysql.connection.cursor()
+            sql = 'UPDATE user SET password = % s WHERE userID = % s'
+            data = (newPassword,id)
+            cursor.execute(sql,data)
+            mysql.connection.commit()
+            error = 'Account updated, please login again'
+            session.pop('logged_in', None)
+            session.pop('user', None)
+            return render_template('updatePassword.html',user=user,error=error)
+    return render_template('updatePassword.html',user=user)
 # start the server with the 'run()' method
 if __name__ == '__main__':
     app.run(debug=True)
-
