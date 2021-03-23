@@ -81,7 +81,7 @@ def admin():
         else:
             session['logged_in'] = True
             flash('You were logged in.')
-            return redirect(url_for('adminPage'))
+            return redirect(url_for('displayUser'))
     return render_template('admin.html', error=error)
 
 @app.route('/adminPage')
@@ -183,6 +183,14 @@ def updatePassword(id):
             session.pop('user', None)
             return render_template('updatePassword.html',user=user,error=error)
     return render_template('updatePassword.html',user=user)
+
+@app.route('/deleteAccount/<int:id>')
+def deleteAccount(id):
+    cursor = mysql.connection.cursor(MySQLdb.cursors.DictCursor)
+    cursor.execute('DELETE FROM user WHERE userID = % s' % (id))
+    mysql.connection.commit()
+    return redirect(url_for('home'))
+
 # start the server with the 'run()' method
 if __name__ == '__main__':
     app.run(debug=True)
