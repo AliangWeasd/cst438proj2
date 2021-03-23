@@ -139,7 +139,6 @@ def testDisplay():
 
 
 @app.route('/editUser', methods=['GET', 'POST'])
-@login_required
 def editUser():
     error = ''
     if 'user' in session:
