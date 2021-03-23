@@ -1,0 +1,43 @@
+.container {
+  margin: 6.8rem 0;
+  text-align: center;
+  position: relative;
+}
+
+.hero {
+  font-size: 4.5rem;
+  font-weight: bold;
+  margin: 3.5rem 0;
+  color: #080707;
+}
+
+.form {
+  position: absolute;
+  margin-top: 6.8rem;
+  top: 20%;
+  left: 50%;
+  transform: translate(-50%);
+}
+
+.inp {
+  display: block;
+  width: 100%;
+  margin: 1.5rem 0;
+  padding: 0.5rem 1rem;
+  font-size: 2.5rem;
+  border-radius: 0;
+  border: 1px solid #080707;
+}
+
+.btn-submit {
+  display: block;
+  width: 100%;
+  margin-top: 2.5rem;
+  border: none;
+  border-radius: none;
+  color: #ffffff;
+  font-size: 2.75rem;
+  background-color: #e9092e;
+  padding: 1rem 1.5rem;
+  cursor: pointer;
+}

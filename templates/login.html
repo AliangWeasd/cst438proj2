@@ -1,58 +1,44 @@
 <!DOCTYPE html>
 <html lang="en">
-<html>
 <head>
-	<title>Test Homepage</title>
-	<link href="https://fonts.googleapis.com/css?family=Montserrat:400,600i,700,900" rel="stylesheet">
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
-  integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
-	<link rel="stylesheet" type="text/css" href="frontPage.css">
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@100;200;300;400;500;700&display=swap" rel="stylesheet"/>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/login.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/global.css') }}">
+    <title>AKAR Login</title>
 </head>
-
 <body>
-<div class="background">
-<nav class="navbar navbar-default">
-    <div class="container">
-  
-      <div class="navbar-header">
-        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
-          <span class="sr-only">Toggle navigation</span>
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
-        </button>
-        <a class="navbar-brand" href="#">AKAR Wishlist</a>
-      </div>
-  
-      <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-        <ul class="nav navbar-nav">
-            <li><a href="/">Home</a></li>
-            <li><a href="/admin">Admin</a></li>
+    <nav class = "nav">
+        <ul>
+            <li>
+                <a href = "/signUp" >
+                    <div class = "nav-hero">AKAR Wishlist</div>
+                </a>
+            </li>
+            <li>
+                <a href = "/">Home</a>
+            </li>
+            <li>
+                <a href = "/admin">Admin</a>
+            </li>
+            <li>
+                <a href = "/wishlist">Wishlist</a>
+            </li>
+            <li>
+                <a href = "/login">Login</a>
+            </li>
         </ul>
-        <ul class="nav navbar-nav">
-          <li><a href="/wishlist"></i>Wishlist</a></li>
-  
-        </ul>
-        <ul class="nav navbar-nav navbar-right">
-          <li><a href="/login"></i>Login</a></li>
-          <li><a href="/logout"></i>Logout</a></li>
-  
-        </ul>
-      </div>
+    </nav>
+    <div class = "container">
+        <h1 class = "hero">Welcome Back</h1>
+        <form class = "form"  method="post">
+          <input class = "inp" type="text" name = "username" placeholder = "Username" value="{{request.form.password }}">
+          <input class = "inp" type="password" name = "password" placeholder = "Password" value="{{request.form.password }}">     
+            <button type = "submit" class = "btn-submit">Login</button>
+            <br>{{error}}
+        </form>
     </div>
-  </nav>
-</div>
-
-
-<h1 align="center">Welcome to Wishlist!</h1>
-<br>
-<h3 align="center">Please login</h3>
-<br>
-<div align="center">
-
-  <form action="" method="post">
-    <input type="text" placeholder="Username" name="username" value="{{request.form.username }}">
-    <input type="password" placeholder="Password" name="password" value="{{request.form.password }}">
-    <input class="btn btn-default" type="submit" value="Login">
-  </form>
-</div>
+</body>
+</html>

@@ -1,3 +1,4 @@
+
 # import the Flask class from the flask module
 from flask import Flask, render_template, redirect, \
     url_for, request, session, flash
@@ -16,20 +17,20 @@ mysql = MySQL(app)
 # config
 app.secret_key = 'my precious'
 
-# # login required decorator
-# def login_required(f):
-#     @wraps(f)
-#     def wrap(*args, **kwargs):
-#         if 'logged_in' in session:
-#             return f(*args, **kwargs)
-#         else:
-#             flash('You need to login first.')
-#             return redirect(url_for('login'))
-#     return wrap
+# login required decorator
+def login_required(f):
+    @wraps(f)
+    def wrap(*args, **kwargs):
+        if 'logged_in' in session:
+            return f(*args, **kwargs)
+        else:
+            flash('You need to login first.')
+            return redirect(url_for('login'))
+    return wrap
 
 @app.route('/signUp', methods=['GET', 'POST'])
 def signUp():
-    error = None
+    error = ''
     if request.method == 'POST' and 'username' in request.form and 'password' in request.form:
         name = request.form['name']
         username = request.form['username']
@@ -53,7 +54,7 @@ def home():
 #route for handling the login page logic
 @app.route('/login', methods=['GET', 'POST'])
 def login():
-    error = None
+    error = ''
     if request.method == 'POST' and 'username' in request.form and 'password' in request.form:
         username = request.form['username'] 
         password = request.form['password']
@@ -72,7 +73,7 @@ def login():
 
 @app.route('/admin',methods=['GET', 'POST'])
 def admin():
-    error = None
+    error = ''
     if request.method == 'POST':
         if (request.form['adminUsername'] != 'admin') \
                 or request.form['adminPassword'] != 'admin':
@@ -80,7 +81,7 @@ def admin():
         else:
             session['logged_in'] = True
             flash('You were logged in.')
-            return redirect(url_for('adminPage'))
+            return redirect(url_for('displayUser'))
     return render_template('admin.html', error=error)
 
 @app.route('/adminPage')
@@ -138,6 +139,60 @@ def testDisplay():
     cursor.execute('SELECT * FROM WishlistItems')
     data = cursor.fetchall()
     return render_template('testDisplay.html', error=error, data=data)
+
+
+@app.route('/editUser', methods=['GET', 'POST'])
+def editUser():
+    error = ''
+    if 'user' in session:
+        user = session["user"]
+        cursor = mysql.connection.cursor(MySQLdb.cursors.DictCursor)
+        cursor.execute('SELECT * FROM user')
+        data = cursor.fetchone()
+    return render_template('editUser.html',error=error,data=data,user=user)
+
+@app.route('/updateUsername/<int:id>', methods=['GET', 'POST'])
+def updateUsername(id):
+    error = ''
+    if 'user' in session:
+        user = session["user"]
+        if request.method == 'POST' and 'newUsername' in request.form:
+            newUsername = request.form['newUsername']
+            cursor = mysql.connection.cursor()
+            sql = 'UPDATE user SET username = % s WHERE userID = % s'
+            data = (newUsername,id)
+            cursor.execute(sql,data)
+            mysql.connection.commit()
+            error = 'Account updated, please login again'
+            session.pop('logged_in', None)
+            session.pop('user', None)
+            return render_template('updateUsername.html',user=user,error=error)
+    return render_template('updateUsername.html',user=user)
+
+@app.route('/updatePassword/<int:id>', methods=['GET', 'POST'])
+def updatePassword(id):
+    error = ''
+    if 'user' in session:
+        user = session["user"]
+        if request.method == 'POST' and 'newPassword' in request.form:
+            newPassword = request.form['newPassword']
+            cursor = mysql.connection.cursor()
+            sql = 'UPDATE user SET password = % s WHERE userID = % s'
+            data = (newPassword,id)
+            cursor.execute(sql,data)
+            mysql.connection.commit()
+            error = 'Account updated, please login again'
+            session.pop('logged_in', None)
+            session.pop('user', None)
+            return render_template('updatePassword.html',user=user,error=error)
+    return render_template('updatePassword.html',user=user)
+
+@app.route('/deleteAccount/<int:id>')
+def deleteAccount(id):
+    cursor = mysql.connection.cursor(MySQLdb.cursors.DictCursor)
+    cursor.execute('DELETE FROM user WHERE userID = % s' % (id))
+    mysql.connection.commit()
+    return redirect(url_for('home'))
 
 # start the server with the 'run()' method
 if __name__ == '__main__':
