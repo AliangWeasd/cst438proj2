@@ -120,10 +120,11 @@ def wishlist():
     cursor.execute('SELECT * FROM WishlistItems')
     data = cursor.fetchall()
     if request.method == 'POST':
+        listName = request.form['listName']
         itemURL = request.form['itemURL']
         imageURL = request.form['imageURL']
         description = request.form['description']
-        cursor.execute('INSERT INTO WishlistItems VALUES (NULL, % s, % s, % s)', (itemURL, imageURL, description, ))
+        cursor.execute('INSERT INTO WishlistItems VALUES (NULL,%s , % s, % s, % s)', (listName, itemURL, imageURL, description, ))
         mysql.connection.commit()
         error = 'Wishlist Added'
         return redirect("/wishlist")
