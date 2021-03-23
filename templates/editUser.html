@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@100;200;300;400;500;700&display=swap" rel="stylesheet"/>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+    integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/login.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/global.css') }}">
+    <title>AKAR Login</title>
+</head>
+<body>
+    <nav class = "nav">
+        <ul>
+            <li>
+                <a href = "/signUp" >
+                    <div class = "nav-hero">AKAR Wishlist</div>
+                </a>
+            </li>
+            <li>
+                <a href = "/">Home</a>
+            </li>
+            <li>
+                <a href = "/admin">Admin</a>
+            </li>
+            <li>
+                <a href = "/wishlist">Wishlist</a>
+            </li>
+            <li>
+                <a href = "/login">Login</a>
+            </li>
+        </ul>
+    </nav>
+        <h1 class = "hero">Edit User Settings</h1>
+
+        <table align="center">
+            <thead>
+              <tr>
+                  <th>User ID</th>
+                  <th>Username</th>
+                  <th>Password</th>
+              </tr>
+              </thead>    
+              <tbody>
+               {% for row in data %}    
+                      <tr>
+                          <td>{{user.userID}}</td>
+                          <td>{{user.username}}</td>
+                          <td>{{user.password}}</td>
+                          <td><a href="/updateUsername/{{user.userID}}" class="btn-outline-secondary btn-sm">Update Username</a></td>
+                          <td><a href="/updatePassword/{{user.userID}}" class="btn-outline-secondary btn-sm">Update Password</a></td>
+                      </tr>
+                  {% endfor %}
+              </tbody>
+          </table>
+</body>
+</html>

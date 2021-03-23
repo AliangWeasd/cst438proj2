@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@100;200;300;400;500;700&display=swap" rel="stylesheet"/>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/login.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/global.css') }}">
+
+    <title>AKAR Sign Up</title>
+</head>
+<body>
+    <nav class = "nav">
+        <ul>
+            <li>
+                <a href = "#" >
+                    <div class = "nav-hero">AKAR Wishlist</div>
+                </a>
+            </li>
+            <li>
+                <a href = "/">Home</a>
+            </li>
+            <li>
+                <a href = "/admin">Admin</a>
+            </li>
+            <li>
+                <a href = "/wishlist">Wishlist</a>
+            </li>
+            <li>
+                <a href = "/login">Login</a>
+            </li>
+        </ul>
+    </nav>
+    <div class = "container">
+        <h1 class = "hero">Sign Up</h1>
+        <form class = "form" method="POST">
+            <input class = "inp" type="text" name = "newUsername" placeholder = "New Username">
+            <button type = "submit" class = "btn-submit">Update Username</button>
+            <br>{{error}}
+        </form>
+    </div>
+</body>
+</html>
