@@ -160,11 +160,6 @@ def viewItems():
         imageURL = request.form['imageURL']
         description = request.form['description']
         cursor.execute('INSERT INTO WishlistItems VALUES (NULL, %s, %s, % s, % s, % s)', (listID, name, itemURL, imageURL, description,))
-        listName = request.form['listName']
-        itemURL = request.form['itemURL']
-        imageURL = request.form['imageURL']
-        description = request.form['description']
-        cursor.execute('INSERT INTO WishlistItems VALUES (NULL,%s , % s, % s, % s)', (listName, itemURL, imageURL, description, ))
         mysql.connection.commit()
         error = 'Wishlist Item Added'
         #Need an alert if a duplicate was found(try/catch)    
