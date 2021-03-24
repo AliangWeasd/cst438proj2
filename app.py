@@ -90,10 +90,6 @@ def adminPage():
 
 @app.route('/welcome')
 def welcome():
-    #cursor = mysql.connection.cursor(MySQLdb.cursors.DictCursor)
-    #cursor.execute('SELECT * FROM wishlist WHERE wishlist.userID = % s', (session['user']['userID'],))
-    #session['wishlists'] = cursor.fetchall()
-
     return render_template('welcome.html')  # render a template
 
 
@@ -118,86 +114,33 @@ def delete(id):
     mysql.connection.commit()
     return redirect(url_for('displayUser'))
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-@app.route('/wishlist', methods=['GET', 'POST', 'DELETE'])
-=======
-@app.route('/deleteList',methods=['GET','POST'])
-def deleteList():
-    cursor = mysql.connection.cursor(MySQLdb.cursors.DictCursor)
-    cursor.execute('DELETE FROM wishlist WHERE wishlistID = %s' % (request.args.get('wishlistID'),))
-    mysql.connection.commit()
-    cursor.execute('DELETE FROM WishlistItems WHERE wishlistID = %s' % (request.args.get('wishlistID'),))
-    mysql.connection.commit()
-
-    return redirect("/wishList")
-
-@app.route('/addList',methods=['GET', 'POST'])
-def addList():
-    listName = request.form['name']
-    cursor = mysql.connection.cursor(MySQLdb.cursors.DictCursor)
-    cursor.execute('INSERT INTO wishlist VALUES (NULL, %s, %s)', (listName,session['user']['userID'], ))
-    mysql.connection.commit()
-
-    return redirect('/wishList')
-    #return render_template('welcome.html', loginUser=session['user'], wishlistTable=session['wishlists'])
-
-@app.route('/wishList', methods=['GET', 'POST'])
->>>>>>> main
-=======
-@app.route('/wishlist', methods=['GET', 'POST'])
->>>>>>> parent of e3571c9 (Deletion Attempts and Database Adjustments)
-=======
-@app.route('/wishlist', methods=['GET', 'POST'])
->>>>>>> parent of e3571c9 (Deletion Attempts and Database Adjustments)
-def wishlist():
-    cursor = mysql.connection.cursor(MySQLdb.cursors.DictCursor)
-    cursor.execute('SELECT * FROM wishlist WHERE wishlist.userID = % s', (session['user']['userID'],))
-    session['wishlists'] = cursor.fetchall()
-
-    return render_template('wishList.html',loginUser=session['user'], wishlistTable=session['wishlists']) 
-
-@app.route('/viewItems', methods=['GET', 'POST'])
-def viewItems():
+@app.route('/wishList', methods=['GET', 'POST', 'DELETE'])
+def wishList():
     error = 'none'
     cursor = mysql.connection.cursor()
-
-    listID = request.args.get('wishlistID')
-
+    cursor.execute('SELECT * FROM WishlistItems')
+    data = cursor.fetchall()
     if request.method == 'POST':
-        listID = request.form['wishlistID']
-        name = request.form['listName']
+        listName = request.form['listName']
         itemURL = request.form['itemURL']
         imageURL = request.form['imageURL']
         description = request.form['description']
-        cursor.execute('INSERT INTO WishlistItems VALUES (NULL, %s, %s, % s, % s, % s)', (listID, name, itemURL, imageURL, description,))
+        cursor.execute('INSERT INTO WishlistItems VALUES (NULL,%s , % s, % s, % s)', (listName, itemURL, imageURL, description, ))
         mysql.connection.commit()
-<<<<<<< HEAD
         error = 'Wishlist Added'
         return redirect("/wishlist")
-        #Need an alert if a duplicate was found(try/catch)     
+    if request.method == 'DELETE':
+        wishlistID = request.form['wishlistID']
+        cursor.execute('DELETE FROM WishlistItems WHERE wishlistID = %s' % (wishlistID))
+        mysql.connection.commit()
+        return redirect("/wishlist")   
     return render_template('wishList.html', error=error, data=data)
-=======
-        error = 'Wishlist Item Added'
-        #Need an alert if a duplicate was found(try/catch)    
-        
-    cursor.execute('SELECT * FROM WishlistItems WHERE wishlistID = %s',(listID,))
-    data = cursor.fetchall()
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-    return render_template('viewItems.html', error=error, data=data, wishlistID=listID)
->>>>>>> main
-=======
 @app.route('/wishlistDelete/<int:id>', methods=['DELETE'])
 def wishlistDelete(id):
 
     return redirect("/wishlist")
->>>>>>> parent of c4f981a (Quick Update)
 
-=======
->>>>>>> parent of e3571c9 (Deletion Attempts and Database Adjustments)
 @app.route('/testDisplay', methods=['GET'])
 def testDisplay():
     error = 'none'
