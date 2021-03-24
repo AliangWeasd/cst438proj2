@@ -42,7 +42,7 @@
     <div align="center" class="column is-4 is-offset-4">
       <h3 class="title">Add Wishlist</h3>
       <div class="box">
-          <form method="POST" action="/wishlist">
+          <form method="POST" action="/wishList">
   
               <div class="field">
               <div class="control">
@@ -83,7 +83,7 @@
             <td>{{item[3]}}</td><br>
             <td><img src={{item[4]}}></td><br>
             Description: <td>{{item[5]}}</td><br>
-            <td><button id={{item[1]}} class="deleteBtn">Delete</button></td>
+            <td><a href="/wishlistDelete/{{item[0]}}" class="btn-outline-secondary btn-sm">Delete</a></td>
         </tr>
         <hr>
       {% endfor %}

@@ -125,21 +125,23 @@ def wishList():
         itemURL = request.form['itemURL']
         imageURL = request.form['imageURL']
         description = request.form['description']
-        cursor.execute('INSERT INTO WishlistItems VALUES (NULL,%s , % s, % s, % s)', (listName, itemURL, imageURL, description, ))
+        cursor.execute('INSERT INTO WishlistItems VALUES (NULL, %s , % s, % s, % s)', (listName, itemURL, imageURL, description, ))
         mysql.connection.commit()
         error = 'Wishlist Added'
-        return redirect("/wishlist")
+        return redirect("/wishList")
     if request.method == 'DELETE':
         wishlistID = request.form['wishlistID']
         cursor.execute('DELETE FROM WishlistItems WHERE wishlistID = %s' % (wishlistID))
         mysql.connection.commit()
-        return redirect("/wishlist")   
+        return redirect("/wishList")  
     return render_template('wishList.html', error=error, data=data)
 
-@app.route('/wishlistDelete/<int:id>', methods=['DELETE'])
+@app.route('/wishlistDelete/<int:id>')
 def wishlistDelete(id):
-
-    return redirect("/wishlist")
+    cursor = mysql.connection.cursor(MySQLdb.cursors.DictCursor)
+    cursor.execute('DELETE FROM WishlistItems WHERE ID = % s' % (id))
+    mysql.connection.commit()
+    return redirect("/wishList")
 
 @app.route('/testDisplay', methods=['GET'])
 def testDisplay():
