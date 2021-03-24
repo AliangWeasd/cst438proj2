@@ -186,8 +186,15 @@ def viewItems():
     data = cursor.fetchall()
 
 <<<<<<< HEAD
+<<<<<<< HEAD
     return render_template('viewItems.html', error=error, data=data, wishlistID=listID)
 >>>>>>> main
+=======
+@app.route('/wishlistDelete/<int:id>', methods=['DELETE'])
+def wishlistDelete(id):
+
+    return redirect("/wishlist")
+>>>>>>> parent of c4f981a (Quick Update)
 
 =======
 >>>>>>> parent of e3571c9 (Deletion Attempts and Database Adjustments)
