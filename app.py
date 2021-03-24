@@ -90,6 +90,10 @@ def adminPage():
 
 @app.route('/welcome')
 def welcome():
+    #cursor = mysql.connection.cursor(MySQLdb.cursors.DictCursor)
+    #cursor.execute('SELECT * FROM wishlist WHERE wishlist.userID = % s', (session['user']['userID'],))
+    #session['wishlists'] = cursor.fetchall()
+
     return render_template('welcome.html')  # render a template
 
 
@@ -114,23 +118,61 @@ def delete(id):
     mysql.connection.commit()
     return redirect(url_for('displayUser'))
 
+@app.route('/deleteList',methods=['GET','POST'])
+def deleteList():
+    cursor = mysql.connection.cursor(MySQLdb.cursors.DictCursor)
+    cursor.execute('DELETE FROM wishlist WHERE wishlistID = %s' % (request.args.get('wishlistID'),))
+    mysql.connection.commit()
+    cursor.execute('DELETE FROM WishlistItems WHERE wishlistID = %s' % (request.args.get('wishlistID'),))
+    mysql.connection.commit()
+
+    return redirect("/wishlist")
+
+@app.route('/addList',methods=['GET', 'POST'])
+def addList():
+    listName = request.form['name']
+    cursor = mysql.connection.cursor(MySQLdb.cursors.DictCursor)
+    cursor.execute('INSERT INTO wishlist VALUES (NULL, %s, %s)', (listName,session['user']['userID'], ))
+    mysql.connection.commit()
+
+    return redirect('wishlist')
+    #return render_template('welcome.html', loginUser=session['user'], wishlistTable=session['wishlists'])
+
 @app.route('/wishlist', methods=['GET', 'POST'])
 def wishlist():
+    cursor = mysql.connection.cursor(MySQLdb.cursors.DictCursor)
+    cursor.execute('SELECT * FROM wishlist WHERE wishlist.userID = % s', (session['user']['userID'],))
+    session['wishlists'] = cursor.fetchall()
+
+    return render_template('wishlist.html',loginUser=session['user'], wishlistTable=session['wishlists']) 
+
+@app.route('/viewItems', methods=['GET', 'POST'])
+def viewItems():
     error = 'none'
     cursor = mysql.connection.cursor()
-    cursor.execute('SELECT * FROM WishlistItems')
-    data = cursor.fetchall()
+
+    listID = request.args.get('wishlistID')
+
     if request.method == 'POST':
+        listID = request.form['wishlistID']
+        name = request.form['listName']
+        itemURL = request.form['itemURL']
+        imageURL = request.form['imageURL']
+        description = request.form['description']
+        cursor.execute('INSERT INTO WishlistItems VALUES (NULL, %s, %s, % s, % s, % s)', (listID, name, itemURL, imageURL, description,))
         listName = request.form['listName']
         itemURL = request.form['itemURL']
         imageURL = request.form['imageURL']
         description = request.form['description']
         cursor.execute('INSERT INTO WishlistItems VALUES (NULL,%s , % s, % s, % s)', (listName, itemURL, imageURL, description, ))
         mysql.connection.commit()
-        error = 'Wishlist Added'
-        return redirect("/wishlist")
-        #Need an alert if a duplicate was found(try/catch)     
-    return render_template('wishList.html', error=error, data=data)
+        error = 'Wishlist Item Added'
+        #Need an alert if a duplicate was found(try/catch)    
+        
+    cursor.execute('SELECT * FROM WishlistItems WHERE wishlistID = %s',(listID,))
+    data = cursor.fetchall()
+
+    return render_template('viewItems.html', error=error, data=data, wishlistID=listID)
 
 @app.route('/testDisplay', methods=['GET'])
 def testDisplay():
