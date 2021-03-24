@@ -17,16 +17,16 @@ mysql = MySQL(app)
 # config
 app.secret_key = 'my precious'
 
-# login required decorator
-def login_required(f):
-    @wraps(f)
-    def wrap(*args, **kwargs):
-        if 'logged_in' in session:
-            return f(*args, **kwargs)
-        else:
-            flash('You need to login first.')
-            return redirect(url_for('login'))
-    return wrap
+# # login required decorator
+# def login_required(f):
+#     @wraps(f)
+#     def wrap(*args, **kwargs):
+#         if 'logged_in' in session:
+#             return f(*args, **kwargs)
+#         else:
+#             flash('You need to login first.')
+#             return redirect(url_for('login'))
+#     return wrap
 
 @app.route('/signUp', methods=['GET', 'POST'])
 def signUp():
@@ -160,11 +160,6 @@ def viewItems():
         imageURL = request.form['imageURL']
         description = request.form['description']
         cursor.execute('INSERT INTO WishlistItems VALUES (NULL, %s, %s, % s, % s, % s)', (listID, name, itemURL, imageURL, description,))
-        listName = request.form['listName']
-        itemURL = request.form['itemURL']
-        imageURL = request.form['imageURL']
-        description = request.form['description']
-        cursor.execute('INSERT INTO WishlistItems VALUES (NULL,%s , % s, % s, % s)', (listName, itemURL, imageURL, description, ))
         mysql.connection.commit()
         error = 'Wishlist Item Added'
         #Need an alert if a duplicate was found(try/catch)    
