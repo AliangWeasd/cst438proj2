@@ -126,7 +126,7 @@ def deleteList():
     cursor.execute('DELETE FROM WishlistItems WHERE wishlistID = %s' % (request.args.get('wishlistID'),))
     mysql.connection.commit()
 
-    return redirect("/wishlist")
+    return redirect("/wishList")
 
 @app.route('/addList',methods=['GET', 'POST'])
 def addList():
@@ -135,16 +135,16 @@ def addList():
     cursor.execute('INSERT INTO wishlist VALUES (NULL, %s, %s)', (listName,session['user']['userID'], ))
     mysql.connection.commit()
 
-    return redirect('wishlist')
+    return redirect('/wishList')
     #return render_template('welcome.html', loginUser=session['user'], wishlistTable=session['wishlists'])
 
-@app.route('/wishlist', methods=['GET', 'POST'])
+@app.route('/wishList', methods=['GET', 'POST'])
 def wishlist():
     cursor = mysql.connection.cursor(MySQLdb.cursors.DictCursor)
     cursor.execute('SELECT * FROM wishlist WHERE wishlist.userID = % s', (session['user']['userID'],))
     session['wishlists'] = cursor.fetchall()
 
-    return render_template('wishlist.html',loginUser=session['user'], wishlistTable=session['wishlists']) 
+    return render_template('wishList.html',loginUser=session['user'], wishlistTable=session['wishlists']) 
 
 @app.route('/viewItems', methods=['GET', 'POST'])
 def viewItems():
@@ -160,11 +160,6 @@ def viewItems():
         imageURL = request.form['imageURL']
         description = request.form['description']
         cursor.execute('INSERT INTO WishlistItems VALUES (NULL, %s, %s, % s, % s, % s)', (listID, name, itemURL, imageURL, description,))
-        listName = request.form['listName']
-        itemURL = request.form['itemURL']
-        imageURL = request.form['imageURL']
-        description = request.form['description']
-        cursor.execute('INSERT INTO WishlistItems VALUES (NULL,%s , % s, % s, % s)', (listName, itemURL, imageURL, description, ))
         mysql.connection.commit()
         error = 'Wishlist Item Added'
         #Need an alert if a duplicate was found(try/catch)    
