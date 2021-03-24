@@ -186,8 +186,8 @@ def viewItems():
 
 @app.route('/wishlistDelete/<int:id>', methods=['DELETE'])
 def wishlistDelete(id):
-    
-    return redirect("/")
+
+    return redirect("/wishlist")
 
 @app.route('/testDisplay', methods=['GET'])
 def testDisplay():
