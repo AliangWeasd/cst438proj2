@@ -119,6 +119,7 @@ def delete(id):
     return redirect(url_for('displayUser'))
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 @app.route('/wishlist', methods=['GET', 'POST', 'DELETE'])
 =======
 @app.route('/deleteList',methods=['GET','POST'])
@@ -143,6 +144,9 @@ def addList():
 
 @app.route('/wishList', methods=['GET', 'POST'])
 >>>>>>> main
+=======
+@app.route('/wishlist', methods=['GET', 'POST'])
+>>>>>>> parent of e3571c9 (Deletion Attempts and Database Adjustments)
 def wishlist():
     cursor = mysql.connection.cursor(MySQLdb.cursors.DictCursor)
     cursor.execute('SELECT * FROM wishlist WHERE wishlist.userID = % s', (session['user']['userID'],))
@@ -168,11 +172,7 @@ def viewItems():
 <<<<<<< HEAD
         error = 'Wishlist Added'
         return redirect("/wishlist")
-    if request.method == 'DELETE':
-        wishlistID = request.form['wishlistID']
-        cursor.execute('DELETE FROM WishlistItems WHERE wishlistID = %s' % (wishlistID))
-        mysql.connection.commit()
-        return redirect("/wishlist")   
+        #Need an alert if a duplicate was found(try/catch)     
     return render_template('wishList.html', error=error, data=data)
 =======
         error = 'Wishlist Item Added'
@@ -183,11 +183,6 @@ def viewItems():
 
     return render_template('viewItems.html', error=error, data=data, wishlistID=listID)
 >>>>>>> main
-
-@app.route('/wishlistDelete/<int:id>', methods=['DELETE'])
-def wishlistDelete(id):
-
-    return redirect("/wishlist")
 
 @app.route('/testDisplay', methods=['GET'])
 def testDisplay():
