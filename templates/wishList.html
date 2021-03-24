@@ -1,4 +1,4 @@
-<<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <html>
 <head>
@@ -8,12 +8,10 @@
   integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
 	<link rel="stylesheet" type="text/css" href="frontPage.css">
 </head>
-
 <body>
 <div class="background">
 <nav class="navbar navbar-default">
     <div class="container">
-  
         <div class="navbar-header">
             <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
                 <span class="sr-only">Toggle navigation</span>
@@ -21,21 +19,10 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
+            
             <a class="navbar-brand" href="#">AKAR Wishlist</a>
         </div>
-      
-        <div class="field">
-            <div class="control">
-                <input class="input is-large" type="text" name="listName" placeholder="List name" autofocus="">
-            </div>
-        </div>
 
-        <div class="field">
-            <div class="control">
-                <input class="input is-large" type="url" name="itemURL" placeholder="Item Url" autofocus="">
-            </div>
-        </div>
-  
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul class="nav navbar-nav">
                 <li><a href="/">Home</a></li>
@@ -61,22 +48,6 @@
     <input name="name" value="Default Name">
     <button>Create Wishlist</button>
 </form>
-      <br>
-      <br>
-      <br>
-      <h3 align="center" class="title">Currnet Wishlists</h3>
-      <!--Table-->
-      {% for item in data %}
-        <tr>
-            List Name: <td>{{item[1]}}</td><br>
-            <td>{{item[2]}}</td><br>
-            <td><img src={{item[3]}}></td><br>
-            Description: <td>{{item[4]}}</td><br>
-        </tr>
-        <hr>
-      {% endfor %}
-      
-      </body>
 
 {% for row in wishlistTable %}
     <tr>
