@@ -30,7 +30,7 @@
             <li><a href="/admin">Admin</a></li>
         </ul>
         <ul class="nav navbar-nav">
-          <li><a href="/wishlist"></i>Wishlist</a></li>
+          <li><a href="/wishList"></i>Wishlists</a></li>
   
         </ul>
         <ul class="nav navbar-nav navbar-right">
@@ -42,18 +42,7 @@
 </nav>
 </div>
 
-<h1>Welcome to Wishlist, 
+<h1>Welcome to AKAR Wishlist, 
 {{loginUser['name']}}
 !</h1>
 <br>
-
-<form action="/addList">
-    <button>Create Wishlist</button>
-</form>
-
-{% for row in wishlistTable %}
-    <tr>
-        <td>{{row['wishlistID']}}</td>
-        <td>{{row['name']}}</td>
-    </tr>
-{% endfor %}

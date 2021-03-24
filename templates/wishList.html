@@ -1,48 +1,45 @@
 <!DOCTYPE html>
 <html lang="en">
 <html>
-    <head>
-        <title>Test Homepage</title>
-        <link href="https://fonts.googleapis.com/css?family=Montserrat:400,600i,700,900" rel="stylesheet">
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
-      integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
-        <link rel="stylesheet" type="text/css" href="frontPage.css">
-    </head>
-    
-    <body>
-    <div class="background">
-    <nav class="navbar navbar-default">
-        <div class="container">
-      
-          <div class="navbar-header">
+<head>
+	<title>Test Homepage</title>
+	<link href="https://fonts.googleapis.com/css?family=Montserrat:400,600i,700,900" rel="stylesheet">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+  integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+	<link rel="stylesheet" type="text/css" href="frontPage.css">
+</head>
+<body>
+<div class="background">
+<nav class="navbar navbar-default">
+    <div class="container">
+        <div class="navbar-header">
             <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
-              <span class="sr-only">Toggle navigation</span>
-              <span class="icon-bar"></span>
-              <span class="icon-bar"></span>
-              <span class="icon-bar"></span>
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
             </button>
+            
             <a class="navbar-brand" href="#">AKAR Wishlist</a>
-          </div>
-      
-          <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+        </div>
+
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul class="nav navbar-nav">
                 <li><a href="/">Home</a></li>
                 <li><a href="/admin">Admin</a></li>
             </ul>
             <ul class="nav navbar-nav">
-                <li><a href="/wishlist"></i>Wishlist</a></li>
-        
-              </ul>
-            <ul class="nav navbar-nav navbar-right">
-              <li><a href="/login"></i>Login</a></li>
-              <li><a href="/logout"></i>Logout</a></li>
-      
+                <li><a href="/wishList"></i>Wishlists</a></li>
             </ul>
-          </div>
+            <ul class="nav navbar-nav navbar-right">
+                <li><a href="/logout"></i>Logout</a></li>
+            </ul>
         </div>
-    </nav>
     </div>
+</nav>
+</div>
 
+<<<<<<< HEAD
     <div align="center" class="column is-4 is-offset-4">
       <h3 class="title">Add To Wishlist</h3>
       <div class="box">
@@ -106,5 +103,34 @@
           
         });
       </script>
+=======
+<h1>Here are your wishlists, 
+{{loginUser['name']}}
+!</h1>
+<br>
 
-      </html>
+<form method="POST" action="/addList">
+    <input name="name" value="Default Name">
+    <button>Create Wishlist</button>
+</form>
+>>>>>>> main
+
+{% for row in wishlistTable %}
+    <tr>
+        <td>{{row['wishlistID']}}</td>
+        <td>{{row['name']}}</td>
+        <td>
+            <form method="GET" action="/viewItems?">
+                <input type="hidden" name="wishlistID" value="{{row['wishlistID']}}"/>
+                <button>View</button>
+            </form>
+        </td>  
+        <td>
+            <form method="GET" action="/deleteList?">
+                <input type="hidden" name="wishlistID" value="{{row['wishlistID']}}" />
+                <button>Delete</button>
+            </form>
+        </td>  
+    </tr>
+    <hr/>
+{% endfor %}
