@@ -120,6 +120,7 @@ def delete(id):
 
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 @app.route('/wishlist', methods=['GET', 'POST', 'DELETE'])
 =======
 @app.route('/deleteList',methods=['GET','POST'])
@@ -144,6 +145,9 @@ def addList():
 
 @app.route('/wishList', methods=['GET', 'POST'])
 >>>>>>> main
+=======
+@app.route('/wishlist', methods=['GET', 'POST'])
+>>>>>>> parent of e3571c9 (Deletion Attempts and Database Adjustments)
 =======
 @app.route('/wishlist', methods=['GET', 'POST'])
 >>>>>>> parent of e3571c9 (Deletion Attempts and Database Adjustments)
@@ -181,9 +185,12 @@ def viewItems():
     cursor.execute('SELECT * FROM WishlistItems WHERE wishlistID = %s',(listID,))
     data = cursor.fetchall()
 
+<<<<<<< HEAD
     return render_template('viewItems.html', error=error, data=data, wishlistID=listID)
 >>>>>>> main
 
+=======
+>>>>>>> parent of e3571c9 (Deletion Attempts and Database Adjustments)
 @app.route('/testDisplay', methods=['GET'])
 def testDisplay():
     error = 'none'
