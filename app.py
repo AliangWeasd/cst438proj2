@@ -138,8 +138,8 @@ def wishlist():
 
 @app.route('/wishlistDelete/<int:id>', methods=['DELETE'])
 def wishlistDelete(id):
-
-    return redirect("/wishlist")
+    
+    return redirect("/")
 
 @app.route('/testDisplay', methods=['GET'])
 def testDisplay():

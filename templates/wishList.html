@@ -89,7 +89,8 @@
             <td>{{item[3]}}</td><br>
             <td><img src={{item[4]}}></td><br>
             Description: <td>{{item[5]}}</td><br>
-            <td><button id={{item[1]}} class="deleteBtn">Delete</button></td>
+            <!-- <td><button id={{item[1]}} class="deleteBtn">Delete</button></td> -->
+            <td><button href="/wishlistDelete/{{item.ID}}" class="btn-outline-secondary btn-sm">Delete</button></td>
         </tr>
         <hr>
       {% endfor %}
