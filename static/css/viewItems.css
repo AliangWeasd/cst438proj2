@@ -1,0 +1,145 @@
+.container {
+  margin: 6.8rem;
+
+  position: relative;
+}
+
+.hero {
+  font-size: 4.5rem;
+  font-weight: bold;
+  margin: 3.5rem 0;
+  margin-left: 1.5rem;
+  color: #080707;
+}
+
+.form {
+  text-align: left;
+}
+
+.inp {
+  display: inline-block;
+  margin: 1.5rem;
+  padding: 0.5rem 1rem;
+  font-size: 2.5rem;
+  border: none;
+  border-radius: 0;
+  border-bottom: 1px solid #080707;
+}
+
+.btn-submit {
+  display: block;
+  margin-left: 1.5rem;
+  margin-top: 2.5rem;
+  border: none;
+  border-radius: none;
+  color: #ffffff;
+  font-size: 1.5rem;
+  background-color: #e9092e;
+  padding: 1rem 1.5rem;
+  cursor: pointer;
+}
+
+.container-list {
+  margin: 2.5rem 3.5rem;
+  box-shadow: 0 0 5px 3px #dfdfdf;
+  background-color: #fefefe;
+}
+
+.list {
+  margin: 0;
+  list-style: none;
+}
+
+.list-nav {
+  display: flex;
+  justify-content: space-between;
+  padding: 1rem;
+  background-color: #ffffff;
+}
+
+.list-nav h2 {
+  font-size: 2rem;
+  color: #e9092e;
+}
+
+.btn-crud {
+  display: inline;
+  border: none;
+  border-radius: none;
+  color: #e9092e;
+  font-size: 1rem;
+  font-weight: 600;
+  background-color: #ffffff;
+  padding: 1rem 1.5rem;
+  cursor: pointer;
+  border-radius: 0.25rem;
+  margin: 0.2rem;
+}
+
+.btn-crud.view a {
+  color: #ffffff;
+}
+
+.btn-crud.delete {
+  color: #ffffff;
+  background-color: #e9092e;
+}
+
+.btn-crud.add {
+  color: #080707;
+  padding: calc(1rem - 2px) calc(1.5rem - 2px);
+  background-color: #ffffff;
+  border: 2px solid #080707;
+}
+
+.container .list .list-item {
+  display: flex;
+  padding: 1rem 2rem;
+  background-color: #fbfbfb;
+  justify-content: space-between;
+  align-items: center;
+  font-weight: 500;
+}
+
+.container .list .list-item:hover {
+  background-color: #f3f3f3;
+  cursor: pointer;
+}
+
+.container .list .list-item .right {
+  text-align: left;
+  margin-left: 200px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.container .list .list-item .right .btn-crud {
+  color: #ffffff;
+  background-color: #e9092e;
+  border-radius: 0;
+}
+
+.container .list .list-item:nth-last-of-type(n + 2) {
+  border-bottom: 1px solid #cacaca;
+}
+
+.container .list .list-item .list-title {
+  font-size: 2rem;
+}
+
+.container .list .list-item .list-item-qt {
+  text-align: right;
+  font-size: 1.5rem;
+  margin: 0;
+  padding: 1.5rem;
+  color: #e9092e;
+}
+
+.container .list .list-item .list-item-price {
+  text-align: right;
+  font-size: 1.5rem;
+  margin: 0;
+  padding: 1.5rem;
+  color: #e9092e;
+}

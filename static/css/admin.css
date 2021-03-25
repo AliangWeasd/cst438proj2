@@ -1,0 +1,116 @@
+.container {
+  margin: 6.8rem 0;
+  text-align: center;
+  position: relative;
+}
+
+.hero {
+  font-size: 4.5rem;
+  font-weight: bold;
+  margin: 3.5rem 0;
+  color: #080707;
+}
+
+.user-welcome {
+  width: 100%;
+  padding: 0.5rem 0;
+}
+
+.user-welcome h1 {
+  margin: 2rem;
+  margin-top: 3.5rem;
+  margin-left: 3.5rem;
+  font-size: 4.5rem;
+  font-weight: 500;
+  color: #e9092e;
+}
+
+.inp {
+  display: block;
+  width: 100%;
+  margin: 1.5rem 0;
+  padding: 0.5rem 1rem;
+  font-size: 2.5rem;
+  border-radius: 0;
+  border: 1px solid #080707;
+}
+
+.container-list {
+  margin: 2.5rem 3.5rem;
+  box-shadow: 0 0 5px 3px #dfdfdf;
+  background-color: #fefefe;
+}
+
+.list {
+  margin: 0;
+  list-style: none;
+}
+
+.list-nav {
+  display: flex;
+  justify-content: space-between;
+  padding: 1rem;
+  background-color: #e9092e;
+}
+
+.list-nav h2 {
+  font-size: 2rem;
+  color: #ffffff;
+}
+
+.btn-crud {
+  display: inline;
+  border: none;
+  border-radius: none;
+  color: #e9092e;
+  font-size: 1rem;
+  font-weight: 600;
+  background-color: #ffffff;
+  padding: 1rem 1.5rem;
+  cursor: pointer;
+  border-radius: 0.25rem;
+}
+
+.container-list .list .user {
+  display: flex;
+  padding: 1rem 2rem;
+  background-color: #ffffff;
+  justify-content: space-between;
+  align-items: center;
+  font-weight: 500;
+}
+
+.container-list .list .user:hover {
+  background-color: #f3f3f3;
+  cursor: pointer;
+}
+
+.container-list .list .user .right {
+  display: flex;
+  align-items: center;
+}
+
+.container-list .list .user .right .btn-crud {
+  background-color: #e9092e;
+  border-radius: 0;
+}
+
+.container-list .list .user .right .btn-crud a {
+  color: #ffffff;
+}
+
+.container-list .list .user:nth-last-of-type(n + 2) {
+  border-bottom: 1px solid #cacaca;
+}
+
+.container-list .list .user .user-id {
+  font-size: 2rem;
+}
+
+.container-list .list .user .credential {
+  font-size: 1.5rem;
+  margin: 0;
+  padding: 1.5rem;
+
+  color: #e9092e;
+}
