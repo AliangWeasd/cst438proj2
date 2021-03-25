@@ -169,6 +169,17 @@ def viewItems():
 
     return render_template('viewItems.html', error=error, data=data, wishlistID=listID)
 
+@app.route('/wishlistDelete/<int:id>/<int:wishID>')
+def wishlistDelete(id, wishID):
+    cursor = mysql.connection.cursor(MySQLdb.cursors.DictCursor)
+    cursor.execute('DELETE FROM WishlistItems WHERE ID = % s' % (id))
+    mysql.connection.commit()
+ #   return redirect("/viewItems")
+ #   return redirect(url_for('found', email=x, listOfObjects=y))
+    return redirect(url_for('viewItems', wishlistID=wishID))
+
+
+
 @app.route('/testDisplay', methods=['GET'])
 def testDisplay():
     error = 'none'
