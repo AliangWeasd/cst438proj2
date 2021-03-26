@@ -13,12 +13,9 @@
     <nav class = "nav">
         <ul>
             <li>
-                <a href = "signup.html" >
+                <a href = "/" >
                     <div class = "nav-hero">AKAR Wishlist</div>
                 </a>
-            </li>
-            <li>
-                <a href = "/">Home</a>
             </li>
             <li>
                 <a href = "/admin">Admin</a>
@@ -58,12 +55,16 @@
             {% for item in data %}
             <li class = "list-item">
                 <p class = "list-title">{{item[2]}}</p>
-                <div class = "right">
-                    <p class = "list-item-qt">{{item[3]}}</p>
-                    <img width="150" height="150"  src={{item[4]}}>
-                    <p class = "list-item-price">{{item[5]}}</p>
-                    <button class="btn-crud edit"><a href="/editItem/{{item[0]}}">Edit</button>
-                    <button class = "btn-crud delete"><a href="/wishlistDelete/{{item[0]}}/{{item[1]}}"> Delete</button>
+                <div class="right">
+                    <p class="list-item-qt">{{item[3]}}</p>
+                    <img width="150" height="150" src={{item[4]}}>
+                    <p class="list-item-price">{{item[5]}}</p>
+                    <form method="GET" action="/editItem/{{item[0]}}">
+                        <button class="btn-crud edit">Edit</button>
+                    </form>
+                    <form method="GET" action="/wishlistDelete/{{item[0]}}/{{item[1]}}">
+                        <button class="btn-crud delete">Delete</button>
+                    </form>
                 </div>
             </li>
             {% endfor %}

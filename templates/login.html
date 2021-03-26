@@ -13,15 +13,15 @@
     <nav class = "nav">
         <ul>
             <li>
-                <a href = "/signUp" >
+                <a href = "/" >
                     <div class = "nav-hero">AKAR Wishlist</div>
                 </a>
             </li>
             <li>
-                <a href = "/">Home</a>
+                <a href = "/admin">Admin</a>
             </li>
             <li>
-                <a href = "/admin">Admin</a>
+                <a href="/wishList">Wishlists</a>
             </li>
             <li>
                 <a href = "/login">Login</a>
@@ -30,7 +30,7 @@
     </nav>
     <div class = "container">
         <h1 class = "hero">Welcome Back</h1>
-        <form class = "form"  method="post">
+        <form class = "form"  method="POST" action="/login">
           <input class = "inp" type="text" name = "username" placeholder = "Username" value="{{request.form.password }}">
           <input class = "inp" type="password" name = "password" placeholder = "Password" value="{{request.form.password }}">     
             <button type = "submit" class = "btn-submit">Login</button>

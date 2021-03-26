@@ -228,7 +228,10 @@ def editUser():
         cursor = mysql.connection.cursor(MySQLdb.cursors.DictCursor)
         cursor.execute('SELECT * FROM user')
         data = cursor.fetchone()
-    return render_template('editUser.html',error=error,data=data,user=user)
+        return render_template('editUser.html',error=error,data=data,user=user)
+    else:
+        error = 'We said to login in again, you silly-billy!'
+        return render_template('login.html', error=error)
 
 @app.route('/updateUsername/<int:id>', methods=['GET', 'POST'])
 def updateUsername(id):
@@ -246,7 +249,10 @@ def updateUsername(id):
             session.pop('logged_in', None)
             session.pop('user', None)
             return render_template('updateUsername.html',user=user,error=error)
-    return render_template('updateUsername.html',user=user)
+        return render_template('updateUsername.html',user=user)
+    else:
+        error = 'We said to login in again, you silly-billy!'
+        return render_template('login.html', error=error)
 
 @app.route('/updatePassword/<int:id>', methods=['GET', 'POST'])
 def updatePassword(id):
@@ -264,7 +270,10 @@ def updatePassword(id):
             session.pop('logged_in', None)
             session.pop('user', None)
             return render_template('updatePassword.html',user=user,error=error)
-    return render_template('updatePassword.html',user=user)
+        return render_template('updatePassword.html',user=user)
+    else:
+        error = 'We said to login in again, you silly-billy!'
+        return render_template('login.html', error=error)
 
 @app.route('/deleteAccount/<int:id>')
 def deleteAccount(id):
