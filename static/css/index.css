@@ -1,0 +1,40 @@
+.container {
+  margin: 0;
+  width: 100vw;
+  height: 100vh;
+  text-align: center;
+  position: relative;
+  background-color: transparent;
+  background-image: url("https://www.olivetree.com/blog/wp-content/uploads/2016/11/WishList.jpg");
+  /*background-image: url("../img/homepagebg.jpg");*/
+  background-size: cover;
+}
+
+.hero-container {
+  position: absolute;
+  top: 40%;
+  left: 50%;
+  text-align: center;
+  transform: translate(-50%);
+}
+
+.hero {
+  font-size: 5.5rem;
+  font-weight: bold;
+  padding: 3.5rem 0;
+  color: #080707;
+}
+
+.btn-submit {
+  margin: 0 auto;
+  display: block;
+  text-align: center;
+  margin-top: 2.5rem;
+  border: none;
+  border-radius: none;
+  color: #ffffff;
+  font-size: 2.75rem;
+  background-color: #e9092e;
+  padding: 1rem 1.5rem;
+  cursor: pointer;
+}
