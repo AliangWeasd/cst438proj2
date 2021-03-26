@@ -44,61 +44,39 @@
     </div>
 
     <div align="center" class="column is-4 is-offset-4">
-        <h3 class="title">Add to Wishlist</h3>
+        <h3 class="title">Edit Item {{item[2]}}</h3>
         <div class="box">
-            <form method="POST" action="/viewItems">
-                <input type="hidden" name="wishlistID" value="{{wishlistID}}">
+            <form method="POST" action="/confirmEditItem">
+                <input type="hidden" name="itemID" value="{{item['ID']}}">
+                <input type="hidden" name="wishlistID" value="{{item['wishlistID']}}">
 
                 <div class="field">
                     <div class="control">
-                        <input class="input is-large" type="text" name="listName" placeholder="Item Name" autofocus="">
+                        <input class="input is-large" type="text" name="listName" autofocus="" value="{{item['listName']}}">
                     </div>
                 </div>
 
                 <div class="field">
                     <div class="control">
-                        <input class="input is-large" type="url" name="itemURL" placeholder="Item Url" autofocus="">
+                        <input class="input is-large" type="url" name="itemURL" autofocus="" value="{{item['itemURL']}}">
                     </div>
                 </div>
 
                 <div class="field">
                     <div class="control">
-                        <input class="input is-large" type="url" name="imageURL" placeholder="Image Url" autofocus="">
+                        <input class="input is-large" type="url" name="imageURL" autofocus="" value="{{item['imageURL']}}">
                     </div>
                 </div>
 
                 <div class="field">
                     <div class="control">
-                        <input class="input is-large" type="text" name="description" placeholder="Description">
+                        <input class="input is-large" type="text" name="description" value="{{item['description']}}">
                     </div>
                 </div>
 
-                <button class="button is-block is-info is-large is-fullwidth">Add to Wishlist</button>
+                <button class="button is-block is-info is-large is-fullwidth">Confirm Edit</button>
             </form>
         </div>
-
-        <br>
-        <br>
-        <br>
-        <h3 align="center" class="title">Current Items in Wishlists</h3>
-        <!--Table-->
-        {% for item in data %}
-        <tr>
-            <td>{{item[2]}}</td>
-            <br>
-            <td>{{item[3]}}</td>
-            <br>
-            <td><img src={{item[4]}}></td>
-            <br>
-            <td>{{item[5]}}</td>
-            <br>
-            <td><a href="/editItem/{{item[0]}}" class="btn-outline-secondary btn-sm">Edit</a></td>
-            <br>
-            <td><a href="/wishlistDelete/{{item[0]}}/{{item[1]}}" class="btn-outline-secondary btn-sm">Delete</a></td>
-        </tr>
-        <hr>
-        {% endfor %}
-
 </body>
 
 </html>
