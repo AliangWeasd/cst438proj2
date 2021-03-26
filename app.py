@@ -66,7 +66,7 @@ def login():
             wishlists = cursor.fetchall()
             session['user'] = user
             error = 'Logged in'
-            return render_template('welcome.html', error=error, loginUser=user, wishlistTable=wishlists)
+            return render_template('wishList.html', error=error, loginUser=user, wishlistTable=wishlists)
         else:
             error = 'Incorrect username/password'
     return render_template('login.html', error=error)
