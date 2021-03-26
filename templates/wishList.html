@@ -1,70 +1,70 @@
 <!DOCTYPE html>
 <html lang="en">
-<html>
 <head>
-	<title>Test Homepage</title>
-	<link href="https://fonts.googleapis.com/css?family=Montserrat:400,600i,700,900" rel="stylesheet">
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
-  integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
-	<link rel="stylesheet" type="text/css" href="frontPage.css">
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@100;200;300;400;500;700&display=swap" rel="stylesheet"/>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/wishList.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/global.css') }}">
+    <title>AKAR View Add To Wishlist</title>
 </head>
 <body>
-<div class="background">
-<nav class="navbar navbar-default">
-    <div class="container">
-        <div class="navbar-header">
-            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
-                <span class="sr-only">Toggle navigation</span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-            </button>
-            
-            <a class="navbar-brand" href="#">AKAR Wishlist</a>
-        </div>
+    <nav class = "nav">
+        <ul>
+            <li>
+                <a href = "signup.html" >
+                    <div class = "nav-hero">AKAR Wishlist</div>
+                </a>
+            </li>
+            <li>
+                <a href = "/">Home</a>
+            </li>
+            <li>
+                <a href = "/admin">Admin</a>
+            </li>
+            <li>
+                <a href = "/wishList">Wishlists</a>
+            </li>
+            <li>
+                <a href = "/editUser">Profile</a>
+            </li>
+            <li>
+                <a href = "/logout">Logout</a>
+            </li>
+        </ul>
+    </nav>
+    <div class = "container">
+        <h1 class = "hero">Here are your wishlists, {{loginUser['name']}}.</h1>
+        <form class = "form" method="POST" action="/addList">
+            <input class = "inp" type="text" name = "name" placeholder = "Wishlist Name">
+            <button type = "submit" class = "btn-submit">Create Wishlist</button>
+        </form>
 
-        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-            <ul class="nav navbar-nav">
-                <li><a href="/">Home</a></li>
-                <li><a href="/admin">Admin</a></li>
-            </ul>
-            <ul class="nav navbar-nav">
-                <li><a href="/wishList"></i>Wishlists</a></li>
-            </ul>
-            <ul class="nav navbar-nav navbar-right">
-                <li><a href="/logout"></i>Logout</a></li>
-            </ul>
-        </div>
+        <br>
+        <br>
+        <br>
+        
+
+        <ul class = "list">
+            {% for row in wishlistTable %}
+            <li class = "list-item">
+                <p class = "list-title">{{row['name']}}</p>
+                <div class = "right">
+                    <p class = "list-count">{{row['wishlistID']}}</p>
+                    <form method="GET" action="/viewItems?">
+                        <input type="hidden" name="wishlistID" value="{{row['wishlistID']}}"/>
+                        <button class = "btn-crud view">View</button>
+                    </form>        
+                    <button class = "btn-crud edit">Edit</button>
+                    <form method="GET" action="/deleteList?">
+                        <input type="hidden" name="wishlistID" value="{{row['wishlistID']}}" />
+                        <button class = "btn-crud delete">Delete</button>        
+                    </form>
+                 </div>
+            </li>
+            {% endfor %}
+        </ul>
     </div>
-</nav>
-</div>
-
-<h1>Here are your wishlists, 
-{{loginUser['name']}}
-!</h1>
-<br>
-
-<form method="POST" action="/addList">
-    <input name="name" value="Default Name">
-    <button>Create Wishlist</button>
-</form>
-
-{% for row in wishlistTable %}
-    <tr>
-        <td>{{row['wishlistID']}}</td>
-        <td>{{row['name']}}</td>
-        <td>
-            <form method="GET" action="/viewItems?">
-                <input type="hidden" name="wishlistID" value="{{row['wishlistID']}}"/>
-                <button>View</button>
-            </form>
-        </td>  
-        <td>
-            <form method="GET" action="/deleteList?">
-                <input type="hidden" name="wishlistID" value="{{row['wishlistID']}}" />
-                <button>Delete</button>
-            </form>
-        </td>  
-    </tr>
-    <hr/>
-{% endfor %}
+</body>
+</html>

@@ -1,104 +1,73 @@
 <!DOCTYPE html>
 <html lang="en">
-<html>
 <head>
-    <title>Test Homepage</title>
-    <link href="https://fonts.googleapis.com/css?family=Montserrat:400,600i,700,900" rel="stylesheet">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
-          integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
-    <link rel="stylesheet" type="text/css" href="frontPage.css">
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@100;200;300;400;500;700&display=swap" rel="stylesheet"/>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/viewItems.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/global.css') }}">
+    <title>AKAR View Add To Wishlist</title>
 </head>
-
 <body>
-    <div class="background">
-        <nav class="navbar navbar-default">
-            <div class="container">
-
-                <div class="navbar-header">
-                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
-                        <span class="sr-only">Toggle navigation</span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                    </button>
-                    <a class="navbar-brand" href="#">AKAR Wishlist</a>
-                </div>
-
-                <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-                    <ul class="nav navbar-nav">
-                        <li><a href="/">Home</a></li>
-                        <li><a href="/admin">Admin</a></li>
-                    </ul>
-                    <ul class="nav navbar-nav">
-                        <li><a href="/wishList"></i>Wishlists</a></li>
-
-                    </ul>
-                    <ul class="nav navbar-nav navbar-right">
-                        <li><a href="/login"></i>Login</a></li>
-                        <li><a href="/logout"></i>Logout</a></li>
-
-                    </ul>
-                </div>
+    <nav class = "nav">
+        <ul>
+            <li>
+                <a href = "signup.html" >
+                    <div class = "nav-hero">AKAR Wishlist</div>
+                </a>
+            </li>
+            <li>
+                <a href = "/">Home</a>
+            </li>
+            <li>
+                <a href = "/admin">Admin</a>
+            </li>
+            <li>
+                <a href = "/wishList">Wishlists</a>
+            </li>
+            <li>
+                <a href = "/editUser">Profile</a>
+            </li>
+            <li>
+                <a href = "/logout">Logout</a>
+            </li>
+        </ul>
+    </nav>
+    <div class = "container">
+        <h1 class = "hero">Add To Wishlist</h1>
+        <form class = "form" method="POST" action="/viewItems">
+            <input type="hidden" name="wishlistID" value="{{wishlistID}}">
+            <div>
+                <input class = "inp" type="text" name = "listName" placeholder = "Item Name">
+                <input class = "inp" type="url" name = "itemURL" placeholder = "Item URL">
             </div>
-        </nav>
+            <div>
+                <input class = "inp" type="url" name = "imageURL" placeholder = "Image URL">
+                <input class = "inp" type="text" name = "description" placeholder = "Description">
+            </div>
+            
+            <button type = "submit" class = "btn-submit">Add Item To Wishlist</button>
+        </form>
+
+        <br>
+        <br>
+        <br>
+
+        <ul class = "list">
+            {% for item in data %}
+            <li class = "list-item">
+                <p class = "list-title">{{item[2]}}</p>
+                <div class = "right">
+                    <p class = "list-item-qt">{{item[3]}}</p>
+                    <img width="150" height="150"  src={{item[4]}}>
+                    <p class = "list-item-price">{{item[5]}}</p>
+                    <button class = "btn-crud edit">Edit</button>
+                    <button class = "btn-crud delete"> <a href="/wishlistDelete/{{item[0]}}/{{item[1]}}"> Delete</button></a>  
+                </div>
+            </li>
+            {% endfor %}
+        </ul>
     </div>
-
-    <div align="center" class="column is-4 is-offset-4">
-        <h3 class="title">Add to Wishlist</h3>
-        <div class="box">
-            <form method="POST" action="/viewItems">
-                <input type="hidden" name="wishlistID" value="{{wishlistID}}">
-
-                <div class="field">
-                    <div class="control">
-                        <input class="input is-large" type="text" name="listName" placeholder="Item Name" autofocus="">
-                    </div>
-                </div>
-
-                <div class="field">
-                    <div class="control">
-                        <input class="input is-large" type="url" name="itemURL" placeholder="Item Url" autofocus="">
-                    </div>
-                </div>
-
-                <div class="field">
-                    <div class="control">
-                        <input class="input is-large" type="url" name="imageURL" placeholder="Image Url" autofocus="">
-                    </div>
-                </div>
-
-                <div class="field">
-                    <div class="control">
-                        <input class="input is-large" type="text" name="description" placeholder="Description">
-                    </div>
-                </div>
-
-                <button class="button is-block is-info is-large is-fullwidth">Add to Wishlist</button>
-            </form>
-        </div>
-
-        <br>
-        <br>
-        <br>
-        <h3 align="center" class="title">Current Items in Wishlists</h3>
-        <!--Table-->
-        {% for item in data %}
-        <tr>
-            <td>{{item[2]}}</td>
-            <br>
-            <td>{{item[3]}}</td>
-            <br>
-            <td><img src={{item[4]}}></td>
-            <br>
-            <td>{{item[5]}}</td>
-            <br>
-            <td><a href="/editItem/{{item[0]}}" class="btn-outline-secondary btn-sm">Edit</a></td>
-            <br>
-            <td><a href="/wishlistDelete/{{item[0]}}/{{item[1]}}" class="btn-outline-secondary btn-sm">Delete</a></td>
-        </tr>
-        <hr>
-        {% endfor %}
-
 </body>
-
 </html>
