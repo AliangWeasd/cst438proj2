@@ -31,7 +31,7 @@
     <div class = "container">
         <h1 class = "hero">Welcome Back</h1>
         <form class = "form"  method="POST" action="/login">
-          <input class = "inp" type="text" name = "username" placeholder = "Username" value="{{request.form.password }}">
+          <input class = "inp" type="text" name = "username" placeholder = "Username" value="{{request.form.username }}">
           <input class = "inp" type="password" name = "password" placeholder = "Password" value="{{request.form.password }}">     
             <button type = "submit" class = "btn-submit">Login</button>
             <br>{{error}}
