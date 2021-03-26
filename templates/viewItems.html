@@ -62,8 +62,8 @@
                     <p class = "list-item-qt">{{item[3]}}</p>
                     <img width="150" height="150"  src={{item[4]}}>
                     <p class = "list-item-price">{{item[5]}}</p>
-                    <button class = "btn-crud edit">Edit</button>
-                    <button class = "btn-crud delete"> <a href="/wishlistDelete/{{item[0]}}/{{item[1]}}"> Delete</button></a>  
+                    <button class="btn-crud edit"><a href="/editItem/{{item[0]}}">Edit</button>
+                    <button class = "btn-crud delete"><a href="/wishlistDelete/{{item[0]}}/{{item[1]}}"> Delete</button>
                 </div>
             </li>
             {% endfor %}

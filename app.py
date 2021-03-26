@@ -145,11 +145,16 @@ def addList():
 
 @app.route('/wishList', methods=['GET', 'POST'])
 def wishlist():
-    cursor = mysql.connection.cursor(MySQLdb.cursors.DictCursor)
-    cursor.execute('SELECT * FROM wishlist WHERE wishlist.userID = % s', (session['user']['userID'],))
-    session['wishlists'] = cursor.fetchall()
+    if 'user' in session:
+        cursor = mysql.connection.cursor(MySQLdb.cursors.DictCursor)
+        cursor.execute('SELECT * FROM wishlist WHERE wishlist.userID = % s', (session['user']['userID'],))
+        session['wishlists'] = cursor.fetchall()
 
-    return render_template('wishList.html',loginUser=session['user'], wishlistTable=session['wishlists']) 
+        return render_template('wishList.html',loginUser=session['user'], wishlistTable=session['wishlists'])
+    else:
+        error = 'Login to view wishlists'
+        return render_template('login.html', error=error)
+    
 
 @app.route('/viewItems', methods=['GET', 'POST'])
 def viewItems():
@@ -174,16 +179,37 @@ def viewItems():
 
     return render_template('viewItems.html', error=error, data=data, wishlistID=listID)
 
+@app.route('/editItem/<int:id>')
+def editItem(id):
+    cursor = mysql.connection.cursor(MySQLdb.cursors.DictCursor)
+    cursor.execute('SELECT * FROM WishlistItems WHERE ID = % s' % (id))
+    data = cursor.fetchone()
+
+    return render_template('editItem.html', item=data)
+
+@app.route('/confirmEditItem', methods=['GET','POST'])
+def confirmEditItem():
+    cursor = mysql.connection.cursor(MySQLdb.cursors.DictCursor)
+
+    itemID = request.form['itemID']
+    listID = request.form['wishlistID']
+    name = request.form['listName']
+    itemURL = request.form['itemURL']
+    imageURL = request.form['imageURL']
+    description = request.form['description']
+
+    cursor.execute('UPDATE WishlistItems SET listName = % s, itemURL = % s, imageURL = % s, description = % s WHERE ID = % s', (name, itemURL, imageURL, description, itemID))
+    mysql.connection.commit()
+
+    return redirect(url_for('viewItems', wishlistID=listID))
+
 @app.route('/wishlistDelete/<int:id>/<int:wishID>')
 def wishlistDelete(id, wishID):
     cursor = mysql.connection.cursor(MySQLdb.cursors.DictCursor)
     cursor.execute('DELETE FROM WishlistItems WHERE ID = % s' % (id))
     mysql.connection.commit()
- #   return redirect("/viewItems")
- #   return redirect(url_for('found', email=x, listOfObjects=y))
+
     return redirect(url_for('viewItems', wishlistID=wishID))
-
-
 
 @app.route('/testDisplay', methods=['GET'])
 def testDisplay():
@@ -246,6 +272,10 @@ def deleteAccount(id):
     cursor.execute('DELETE FROM user WHERE userID = % s' % (id))
     mysql.connection.commit()
     return redirect(url_for('home'))
+
+@app.route('/ksEditItem')
+def ksEditItem():
+    return render_template('ksEditItem.html')
 
 # start the server with the 'run()' method
 if __name__ == '__main__':
