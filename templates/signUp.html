@@ -25,9 +25,6 @@
                 <a href = "/admin">Admin</a>
             </li>
             <li>
-                <a href = "/wishList">Wishlists</a>
-            </li>
-            <li>
                 <a href = "/login">Login</a>
             </li>
         </ul>
@@ -38,6 +35,14 @@
             <input class = "inp" type="text" name = "name" placeholder = "Name">
             <input class = "inp" type="text" name = "username" placeholder = "Username">
             <input class = "inp" type="password" name = "password" placeholder = "Password">
+            <ul>
+                <li style="text-align: left;"> 
+                    Password has to be greater than six characters<br>
+                </li>
+                <li>
+                    Password needs to be alphanumeric with at least one special character
+                </li>
+            </ul>
             <button type = "submit" class = "btn-submit">Sign Up</button>
             <br>{{error}}
         </form>
