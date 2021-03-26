@@ -2,11 +2,13 @@
 <html lang="en">
 <html>
 <head>
-    <title>Test Homepage</title>
-    <link href="https://fonts.googleapis.com/css?family=Montserrat:400,600i,700,900" rel="stylesheet">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
-          integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
-    <link rel="stylesheet" type="text/css" href="frontPage.css">
+    <title>Edit Item</title>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@100;200;300;400;500;700&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/viewItems.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/global.css') }}">
 </head>
 
 <body>
@@ -44,7 +46,7 @@
     </div>
 
     <div align="center" class="column is-4 is-offset-4">
-        <h3 class="title">Edit Item {{item[2]}}</h3>
+        <h3 class="title">Edit Item {{item['listName']}}</h3>
         <div class="box">
             <form method="POST" action="/confirmEditItem">
                 <input type="hidden" name="itemID" value="{{item['ID']}}">
