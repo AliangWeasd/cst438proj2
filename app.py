@@ -242,6 +242,10 @@ def deleteAccount(id):
     mysql.connection.commit()
     return redirect(url_for('home'))
 
+@app.route('/ksEditItem')
+def ksEditItem():
+    return render_template('ksEditItem.html')
+
 # start the server with the 'run()' method
 if __name__ == '__main__':
     app.run(debug=True)

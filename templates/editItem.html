@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@100;200;300;400;500;700&display=swap" rel="stylesheet"/>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/viewItems.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/global.css') }}">
+    <title>AKAR View Add To Wishlist</title>
+</head>
+<body>
+    <nav class = "nav">
+        <ul>
+            <li>
+                <a href = "signup.html" >
+                    <div class = "nav-hero">AKAR Wishlist</div>
+                </a>
+            </li>
+            <li>
+                <a href = "mainUserScreen.html">Home</a>
+            </li>
+            <li>
+                <a href = "#">Admin</a>
+            </li>
+            <li>
+                <a href = "#">Wishlist</a>
+            </li>
+            <li>
+                <a href = "#">Logout</a>
+            </li>
+        </ul>
+    </nav>
+    <div class = "container">
+        <h1 class = "hero">Edit Item</h1>
+        <form class = "form" method="POST" action="/confirmEditItem">
+            <input type="hidden" name="itemID" value="{{item['ID']}}">
+            <input type="hidden" name="wishlistID" value="{{item['wishlistID']}}">
+            <div>
+                <input class = "inp" type="text" name = "listName" placeholder = "Item Name" value="{{item['listName']}}">
+                <input class = "inp" type="url" name = "itemURL" placeholder = "Item URL" value="{{item['itemURL']}}">
+            </div>
+            <div>
+                <input class = "inp" type="url" name = "imageURL" placeholder = "Image URL" value="{{item['imageURL']}}">
+                <input class = "inp" type="text" name = "description" placeholder = "Description" value="{{item['description']}}">
+            </div>
+            
+            <button type = "submit" class = "btn-submit">Confirm Changes</button>
+        </form>
+
+        <br>
+        <br>
+        <br>
+  
+
+        <!-- <div class="field">
+            <div class="control">
+                <input class="input is-large" type="text" name="listName" autofocus="" value="{{item['listName']}}">
+            </div>
+        </div>
+
+        <div class="field">
+            <div class="control">
+                <input class="input is-large" type="url" name="itemURL" autofocus="" value="{{item['itemURL']}}">
+            </div>
+        </div>
+
+        <div class="field">
+            <div class="control">
+                <input class="input is-large" type="url" name="imageURL" autofocus="" value="{{item['imageURL']}}">
+            </div>
+        </div>
+
+        <div class="field">
+            <div class="control">
+                <input class="input is-large" type="text" name="description" value="{{item['description']}}">
+            </div>
+        </div> -->
+    </div>
+</body>
+</html>
