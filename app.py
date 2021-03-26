@@ -40,6 +40,11 @@ def signUp():
         user = cursor.fetchone()
         if user:
             error = 'Account already exists'
+        elif len(password) <= 6:
+            error = 'Password must be greater than 6 characters'
+            for x in password:
+                if x != '!' or x != '@' or x != '#':
+                    error = 'Password must contain "!, @, or #"'
         else:
             cursor.execute('INSERT INTO user VALUES (NULL,% s, % s, % s)', (name, username, password, ))
             mysql.connection.commit()
