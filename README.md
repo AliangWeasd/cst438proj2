@@ -1,5 +1,5 @@
 <h1>AKAR Wishlist</h1>
-<h4>CST438 Spring 2021 Project 2</h4>
+<h4>CSUMB CST438 Spring 2021 Project 2</h4>
 https://akar-wishlist.herokuapp.com/
 <hr>
 <h5> Contributors </h5>
